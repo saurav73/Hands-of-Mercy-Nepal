@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Heart, BookOpen, Users, Megaphone, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';
@@ -97,11 +97,13 @@ export function GetInvolvedPage() {
                       <span className="font-medium text-ink text-sm pr-4">{faq.q}</span>
                       <ChevronDown className={`h-5 w-5 text-faint shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
                     </button>
-                    {openFaq === i && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} transition={{ duration: 0.3 }} className="overflow-hidden">
-                        <p className="px-5 pb-5 text-[15px] text-muted leading-relaxed">{faq.a}</p>
-                      </motion.div>
-                    )}
+                    <AnimatePresence>
+                      {openFaq === i && (
+                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+                          <p className="px-5 pb-5 text-[15px] text-muted leading-relaxed">{faq.a}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </ScrollReveal>
               ))}

@@ -6,6 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { GALLERY_DATA } from '@/data/organizationData';
 import { useLang } from '@/contexts/LanguageContext';
 import { cn } from '@/utils/cn';
+import { Gallery3D } from '@/components/three/Gallery3D';
 
 type Cat = 'All' | 'Classes & Learning' | 'Community & Fellowship' | 'Children & Activities';
 
@@ -43,10 +44,15 @@ export function GalleryPage() {
       {/* Hero */}
       <section className="pt-28 pb-16 md:pt-40 md:pb-24">
         <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-xs tracking-widest uppercase text-faint mb-6">{t.galleryEyebrow}</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">{t.galleryTitle}</h1>
-            <p className="mt-7 text-lg text-muted leading-relaxed max-w-xl mx-auto">{t.galleryLead}</p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-xs tracking-widest uppercase text-faint mb-6">{t.galleryEyebrow}</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">{t.galleryTitle}</h1>
+              <p className="mt-7 text-lg text-muted leading-relaxed max-w-xl">{t.galleryLead}</p>
+            </div>
+            <div className="h-[300px] md:h-[400px]">
+              <Gallery3D />
+            </div>
           </div>
         </Container>
       </section>

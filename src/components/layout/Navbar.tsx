@@ -45,7 +45,7 @@ export function Navbar() {
   return (
     <header className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-line' : 'bg-transparent'
+      scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-line shadow-sm' : 'bg-transparent'
     )}>
       <Container>
         <nav className="flex items-center justify-between h-16">
@@ -116,7 +116,7 @@ export function Navbar() {
                   </Link>
                 ))}
                 <div className="mt-4 pt-4 border-t border-line">
-                  <Link to="/get-involved" className="flex items-center justify-center gap-2 w-full py-3 text-sm font-medium text-white bg-ink rounded-lg">
+                  <Link to="/get-involved" className="flex items-center justify-center gap-2 w-full py-3 text-sm font-medium text-white bg-ink rounded-full">
                     {t.navCta} <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>

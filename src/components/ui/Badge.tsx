@@ -2,17 +2,15 @@ import { cn } from '@/utils/cn';
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'blue' | 'indigo' | 'slate' | 'amber' | 'placeholder';
+  variant?: 'primary' | 'secondary' | 'muted';
   className?: string;
 }
 
-export function Badge({ children, variant = 'blue', className }: BadgeProps) {
+export function Badge({ children, variant = 'primary', className }: BadgeProps) {
   const variants = {
-    blue: 'bg-blue-50 text-blue-600 border-blue-100',
-    indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100',
-    slate: 'bg-slate-100 text-slate-600 border-slate-200',
-    amber: 'bg-amber-50 text-amber-700 border-amber-100',
-    placeholder: 'bg-amber-50 text-amber-700 border-amber-200',
+    primary: 'bg-bg text-ink border-line',
+    secondary: 'bg-ink/5 text-ink border-ink/10',
+    muted: 'bg-bg text-faint border-line',
   };
 
   return (

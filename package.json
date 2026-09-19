@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@heyputer/puter.js": "^2.6.3",
-    "@react-three/drei": "^9.117.3",
+    "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.17.14",
+    "@react-three/postprocessing": "^2.19.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.475.0",

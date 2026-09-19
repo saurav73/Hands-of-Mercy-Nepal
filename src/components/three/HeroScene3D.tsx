@@ -1,118 +1,131 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
+import { BookGeometry, PencilGeometry, StarShape, HeartShape } from './geometries';
 
-function Book({ position, color, scale = 1 }: { position: [number, number, number]; color: string; scale?: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  useFrame((state) => {
-    if (ref.current) {
-      ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.3;
-      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.8 + position[2]) * 0.15;
-    }
-  });
-  return (
-    <mesh ref={ref} position={position} scale={scale} castShadow>
-      <boxGeometry args={[0.8, 1, 0.15]} />
-      <meshStandardMaterial color={color} roughness={0.3} metalness={0.1} />
-    </mesh>
-  );
-}
-
-function GraduationCap({ position }: { position: [number, number, number] }) {
+function GraduationCap() {
   const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
-    if (ref.current) {
-      ref.current.rotation.y = state.clock.elapsedTime * 0.3;
-      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.6) * 0.2;
-    }
+    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.15;
   });
   return (
-    <group ref={ref} position={position}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.5, 0.5, 0.05, 4]} />
-        <meshStandardMaterial color="#1e293b" roughness={0.4} />
+    <group ref={ref} position={[0, 0.6, 0]}>
+      {/* Board */}
+      <mesh position={[0, 0, 0]} castShadow rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[0.5, 0.5, 0.04, 6]} />
+        <meshStandardMaterial color="#111827" roughness={0.3} metalness={0.2} />
       </mesh>
-      <mesh position={[0, 0.15, 0]}>
-        <cylinderGeometry args={[0.25, 0.35, 0.25, 4]} />
-        <meshStandardMaterial color="#1e293b" roughness={0.4} />
+      {/* Top cap */}
+      <mesh position={[0, 0.04, 0]}>
+        <cylinderGeometry args={[0.2, 0.2, 0.05, 6]} />
+        <meshStandardMaterial color="#111827" roughness={0.3} metalness={0.2} />
+      </mesh>
+      {/* Tassel string */}
+      <mesh position={[0.2, 0, 0]}>
+        <cylinderGeometry args={[0.005, 0.005, 0.3, 4]} />
+        <meshStandardMaterial color="#f59e0b" roughness={0.4} metalness={0.3} />
+      </mesh>
+      {/* Tassel end */}
+      <mesh position={[0.2, -0.16, 0]}>
+        <coneGeometry args={[0.025, 0.06, 6]} />
+        <meshStandardMaterial color="#f59e0b" roughness={0.4} metalness={0.3} />
+      </mesh>
+      {/* Button on top */}
+      <mesh position={[0, 0.07, 0]}>
+        <sphereGeometry args={[0.02, 8, 8]} />
+        <meshStandardMaterial color="#f59e0b" roughness={0.3} metalness={0.5} />
       </mesh>
     </group>
   );
 }
 
-function Pencil({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) {
-  const ref = useRef<THREE.Mesh>(null);
+function FloatingBook({ position, rotation, color }: { position: [number, number, number]; rotation: [number, number, number]; color: string }) {
+  const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.z = rotation[2] + Math.sin(state.clock.elapsedTime * 0.4 + position[0]) * 0.2;
+      ref.current.rotation.y = rotation[1] + Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.1;
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.7 + position[2]) * 0.08;
     }
   });
   return (
-    <mesh ref={ref} position={position} rotation={rotation}>
-      <cylinderGeometry args={[0.03, 0.03, 1.2, 8]} />
-      <meshStandardMaterial color="#f59e0b" roughness={0.5} />
+    <group ref={ref} position={position} rotation={rotation}>
+      <BookGeometry color={color} />
+    </group>
+  );
+}
+
+function Particle({ position }: { position: [number, number, number] }) {
+  const ref = useRef<THREE.Mesh>(null);
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.8 + position[0] * 3) * 0.15;
+      ref.current.position.x = position[0] + Math.cos(state.clock.elapsedTime * 0.5 + position[2] * 2) * 0.08;
+      const s = 0.6 + Math.sin(state.clock.elapsedTime * 2 + position[0]) * 0.4;
+      ref.current.scale.setScalar(s);
+    }
+  });
+  return (
+    <mesh ref={ref} position={position}>
+      <sphereGeometry args={[0.025, 6, 6]} />
+      <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={1.5} roughness={0.3} metalness={0.2} />
     </mesh>
   );
 }
 
-function Particles({ count = 30 }: { count?: number }) {
-  const points = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 8;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 6;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
-    }
-    return positions;
-  }, [count]);
-  const ref = useRef<THREE.Points>(null);
-  useFrame((state) => {
-    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.02;
-  });
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[points, 3]} />
-      </bufferGeometry>
-      <pointsMaterial size={0.04} color="#93c5fd" transparent opacity={0.6} sizeAttenuation />
-    </points>
-  );
-}
-
 function Scene() {
+  const particles = useMemo(() =>
+    Array.from({ length: 30 }, () => [
+      (Math.random() - 0.5) * 6,
+      (Math.random() - 0.5) * 3,
+      (Math.random() - 0.5) * 4,
+    ] as [number, number, number]), []);
+
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={0.8} />
-      <pointLight position={[-3, 2, 4]} intensity={0.4} color="#818cf8" />
-      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
-        <Book position={[-1.2, 0.5, 0]} color="#3b82f6" />
-        <Book position={[0, -0.3, 0.5]} color="#6366f1" scale={0.8} />
-        <Book position={[1.3, 0.2, -0.3]} color="#8b5cf6" scale={0.9} />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow shadow-mapSize={1024} />
+      <pointLight position={[-3, 2, -2]} color="#f59e0b" intensity={0.6} />
+      <fog attach="fog" args={['#fafafa', 5, 12]} />
+      <Environment preset="city" />
+
+      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
+        <GraduationCap />
       </Float>
-      <GraduationCap position={[0.5, 1.2, -0.5]} />
-      <Pencil position={[-1.5, -0.8, 0.3]} rotation={[0, 0, 0.5]} />
-      <Pencil position={[1.8, 0.8, -0.2]} rotation={[0, 0, -0.3]} />
-      <Particles />
+
+      <FloatingBook position={[-1.5, -0.3, -0.5]} rotation={[0.2, 0.5, 0.1]} color="#3b82f6" />
+      <FloatingBook position={[1.5, 0.1, -0.3]} rotation={[-0.1, -0.3, -0.1]} color="#ef4444" />
+      <FloatingBook position={[-0.8, 0.4, 0.8]} rotation={[0.3, 0.8, -0.2]} color="#10b981" />
+      <FloatingBook position={[0.9, -0.5, 0.6]} rotation={[-0.2, 0.6, 0.15]} color="#f59e0b" />
+
+      <PencilGeometry position={[-2, 0.2, 0]} rotation={[0, 0, 0.5]} />
+      <PencilGeometry position={[2, -0.1, 0.3]} rotation={[0, 0, -0.3]} />
+      <PencilGeometry position={[0, -0.8, -0.5]} rotation={[0.2, 0, 0.8]} />
+
+      <StarShape position={[-1.8, 0.8, -1]} scale={0.8} />
+      <StarShape position={[1.5, 0.7, -0.8]} scale={0.5} />
+      <StarShape position={[0, 1, -1.5]} scale={0.6} />
+
+      <HeartShape position={[1.8, 0.6, -1.2]} scale={0.08} color="#ef4444" />
+      <HeartShape position={[-1.5, -0.6, -1]} scale={0.06} color="#ec4899" />
+
+      {particles.map((pos, i) => (
+        <Particle key={i} position={pos} />
+      ))}
+
+      <ContactShadows position={[0, -1.2, 0]} opacity={0.3} scale={8} blur={2} />
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.8} luminanceSmoothing={0.9} intensity={0.6} />
+      </EffectComposer>
     </>
   );
 }
 
-interface HeroScene3DProps {
-  className?: string;
-}
-
-export function HeroScene3D({ className }: HeroScene3DProps) {
+export function HeroScene3D() {
   return (
-    <div className={`three-container ${className ?? ''}`} style={{ width: '100%', height: '100%' }}>
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 45 }}
-        style={{ overflow: 'visible' }}
-        gl={{ alpha: true, antialias: true }}
-      >
-        <Scene />
-      </Canvas>
-    </div>
+    <Canvas camera={{ position: [0, 0.5, 4], fov: 45 }} shadows style={{ background: 'transparent' }}>
+      <Scene />
+    </Canvas>
   );
 }

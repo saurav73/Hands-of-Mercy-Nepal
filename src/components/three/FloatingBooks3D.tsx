@@ -1,146 +1,128 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
+import { BookGeometry, GlobeGeometry, PencilGeometry } from './geometries';
 
-function Book({ position, color, rotation = [0, 0, 0], scale = 1 }: { position: [number, number, number]; color: string; rotation?: [number, number, number]; scale?: number }) {
-  const ref = useRef<THREE.Mesh>(null);
+function RotatingGlobe() {
+  const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
-    if (ref.current) {
-      ref.current.rotation.y = rotation[1] + Math.sin(state.clock.elapsedTime * 0.4 + position[0] * 2) * 0.3;
-    }
+    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.12;
   });
   return (
-    <mesh ref={ref} position={position} rotation={rotation} scale={scale} castShadow>
-      <boxGeometry args={[0.7, 0.9, 0.12]} />
-      <meshStandardMaterial color={color} roughness={0.3} metalness={0.1} />
-    </mesh>
+    <Float speed={1} rotationIntensity={0.2} floatIntensity={0.3}>
+      <group ref={ref}>
+        <GlobeGeometry scale={0.5} />
+      </group>
+    </Float>
   );
 }
 
-function Globe({ position }: { position: [number, number, number] }) {
-  const ref = useRef<THREE.Group>(null);
-  useFrame((state) => {
-    if (ref.current) {
-      ref.current.rotation.y = state.clock.elapsedTime * 0.3;
-    }
-  });
+function Ruler() {
   return (
-    <group ref={ref} position={position}>
-      <mesh>
-        <sphereGeometry args={[0.4, 24, 24]} />
-        <meshStandardMaterial color="#60a5fa" roughness={0.3} metalness={0.2} transparent opacity={0.7} />
+    <group position={[0, 0, 0]}>
+      <mesh castShadow>
+        <boxGeometry args={[0.08, 1.2, 0.02]} />
+        <meshStandardMaterial color="#fbbf24" roughness={0.4} metalness={0.1} transparent opacity={0.85} />
       </mesh>
-      <mesh>
-        <sphereGeometry args={[0.42, 16, 16]} />
-        <meshStandardMaterial color="#93c5fd" wireframe transparent opacity={0.4} />
-      </mesh>
+      {/* Measurement markings */}
+      {Array.from({ length: 24 }, (_, i) => (
+        <mesh key={i} position={[0.042, -0.55 + i * 0.05, 0]}>
+          <boxGeometry args={[i % 5 === 0 ? 0.025 : 0.012, 0.003, 0.002]} />
+          <meshStandardMaterial color="#111827" />
+        </mesh>
+      ))}
+      {/* Numbers */}
+      {[0, 1, 2, 3, 4, 5].map((n) => (
+        <mesh key={`n-${n}`} position={[0.042, -0.55 + n * 0.25, 0.002]}>
+          <boxGeometry args={[0.015, 0.02, 0.001]} />
+          <meshStandardMaterial color="#111827" />
+        </mesh>
+      ))}
     </group>
   );
 }
 
-function Pencil({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) {
-  const ref = useRef<THREE.Mesh>(null);
+function FloatingBookItem({ position, rotation, color }: { position: [number, number, number]; rotation: [number, number, number]; color: string }) {
+  const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.z = rotation[2] + Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.15;
+      ref.current.rotation.y = rotation[1] + Math.sin(state.clock.elapsedTime * 0.4 + position[0] * 2) * 0.15;
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.6 + position[2]) * 0.06;
     }
   });
   return (
-    <mesh ref={ref} position={position} rotation={rotation}>
-      <cylinderGeometry args={[0.025, 0.025, 1, 8]} />
-      <meshStandardMaterial color="#f59e0b" roughness={0.5} />
-    </mesh>
+    <group ref={ref} position={position} rotation={rotation}>
+      <BookGeometry color={color} width={0.6} height={0.8} thickness={0.1} />
+    </group>
   );
 }
 
-function Ruler({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) {
+function Particle({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.x = rotation[0] + Math.sin(state.clock.elapsedTime * 0.35 + position[1]) * 0.1;
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0] * 4) * 0.2;
+      const s = 0.5 + Math.sin(state.clock.elapsedTime * 1.5 + position[2]) * 0.5;
+      ref.current.scale.setScalar(s);
     }
   });
   return (
-    <mesh ref={ref} position={position} rotation={rotation}>
-      <boxGeometry args={[1.2, 0.02, 0.15]} />
-      <meshStandardMaterial color="#a78bfa" roughness={0.4} metalness={0.1} />
+    <mesh ref={ref} position={position}>
+      <sphereGeometry args={[0.02, 6, 6]} />
+      <meshStandardMaterial color="#3b82f6" emissive="#3b82f6" emissiveIntensity={1} />
     </mesh>
-  );
-}
-
-function Particles({ count = 25 }: { count?: number }) {
-  const ref = useRef<THREE.Points>(null);
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 7;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 5;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 4;
-    }
-    return arr;
-  }, [count]);
-
-  useFrame((state) => {
-    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.015;
-  });
-
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial size={0.035} color="#c4b5fd" transparent opacity={0.5} sizeAttenuation />
-    </points>
   );
 }
 
 function Scene() {
-  const groupRef = useRef<THREE.Group>(null);
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.05;
-    }
-  });
+  const particles = useMemo(() =>
+    Array.from({ length: 25 }, () => [
+      (Math.random() - 0.5) * 6,
+      (Math.random() - 0.5) * 3,
+      (Math.random() - 0.5) * 4,
+    ] as [number, number, number]), []);
 
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.6} color="#e0e7ff" />
-      <pointLight position={[-4, 2, 3]} intensity={0.4} color="#818cf8" />
-      <pointLight position={[3, -2, 4]} intensity={0.3} color="#6366f1" />
-      <group ref={groupRef}>
-        <Float speed={1.3} rotationIntensity={0.15} floatIntensity={0.4}>
-          <Book position={[-1.5, 0.8, 0]} color="#3b82f6" />
-          <Book position={[-0.5, -0.5, 0.5]} color="#6366f1" rotation={[0.2, 0.5, 0.1]} />
-          <Book position={[0.8, 0.3, -0.3]} color="#8b5cf6" rotation={[-0.1, 0.3, -0.2]} />
-          <Book position={[1.5, -0.2, 0.2]} color="#a78bfa" rotation={[0.3, 0.7, 0.15]} />
-          <Book position={[0, 1, -0.5]} color="#4f46e5" rotation={[0.1, 0.4, 0.05]} scale={0.85} />
-        </Float>
-        <Globe position={[1.8, 1, -0.5]} />
-        <Pencil position={[-1.8, -0.8, 0.3]} rotation={[0, 0, 0.6]} />
-        <Pencil position={[1, -1, 0.1]} rotation={[0, 0, -0.4]} />
-        <Ruler position={[-0.3, -1.2, 0.2]} rotation={[0.1, 0.2, 0.05]} />
-      </group>
-      <Particles />
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow shadow-mapSize={1024} />
+      <pointLight position={[-3, 3, -2]} color="#3b82f6" intensity={0.5} />
+      <fog attach="fog" args={['#fafafa', 5, 14]} />
+      <Environment preset="city" />
+
+      <RotatingGlobe />
+
+      <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.3}>
+        <group position={[2, 0.5, 0]} rotation={[0.2, 0.5, 0.1]}>
+          <Ruler />
+        </group>
+      </Float>
+
+      <FloatingBookItem position={[-1.5, -0.3, 0]} rotation={[0.1, 0.3, 0]} color="#3b82f6" />
+      <FloatingBookItem position={[1.5, -0.5, -0.5]} rotation={[-0.1, -0.2, 0.1]} color="#10b981" />
+      <FloatingBookItem position={[-0.5, 0.6, -0.8]} rotation={[0.2, 0.8, -0.1]} color="#8b5cf6" />
+
+      <PencilGeometry position={[-2, 0.3, 0.5]} rotation={[0, 0, 0.6]} />
+      <PencilGeometry position={[2.2, -0.2, 0.3]} rotation={[0.1, 0, -0.4]} />
+
+      {particles.map((pos, i) => (
+        <Particle key={i} position={pos} />
+      ))}
+
+      <ContactShadows position={[0, -1.2, 0]} opacity={0.25} scale={8} blur={2} />
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.7} luminanceSmoothing={0.9} intensity={0.5} />
+      </EffectComposer>
     </>
   );
 }
 
-interface FloatingBooks3DProps {
-  className?: string;
-}
-
-export function FloatingBooks3D({ className }: FloatingBooks3DProps) {
+export function FloatingBooks3D() {
   return (
-    <div className={`three-container ${className ?? ''}`} style={{ width: '100%', height: '100%' }}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
-        style={{ overflow: 'visible' }}
-        gl={{ alpha: true, antialias: true }}
-      >
-        <Scene />
-      </Canvas>
-    </div>
+    <Canvas camera={{ position: [0, 0.5, 4.5], fov: 42 }} shadows style={{ background: 'transparent' }}>
+      <Scene />
+    </Canvas>
   );
 }

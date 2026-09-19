@@ -1,40 +1,27 @@
-import { motion } from 'framer-motion';
-import { Badge } from '@/components/ui/Badge';
-import { cn } from '@/utils/cn';
+import { ScrollReveal } from './ScrollReveal';
 
 interface SectionHeaderProps {
   eyebrow?: string;
   title: string;
-  lead?: string;
-  align?: 'left' | 'center';
-  badgeVariant?: 'blue' | 'indigo' | 'slate' | 'amber';
+  description?: string;
 }
 
-export function SectionHeader({ eyebrow, title, lead, align = 'center', badgeVariant = 'blue' }: SectionHeaderProps) {
+export function SectionHeader({ eyebrow, title, description }: SectionHeaderProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={cn('mb-12 md:mb-16', align === 'center' && 'text-center')}
-    >
+    <div className="text-center mb-14">
       {eyebrow && (
-        <div className="mb-4">
-          <Badge variant={badgeVariant}>{eyebrow}</Badge>
-        </div>
+        <ScrollReveal>
+          <p className="text-xs tracking-widest uppercase text-faint mb-4">{eyebrow}</p>
+        </ScrollReveal>
       )}
-      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
-        {title}
-      </h2>
-      {lead && (
-        <p className={cn(
-          'mt-5 text-lg text-slate-400 leading-relaxed',
-          align === 'center' && 'max-w-2xl mx-auto'
-        )}>
-          {lead}
-        </p>
+      <ScrollReveal delay={0.1}>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">{title}</h2>
+      </ScrollReveal>
+      {description && (
+        <ScrollReveal delay={0.2}>
+          <p className="mt-4 text-muted text-lg leading-relaxed max-w-2xl mx-auto">{description}</p>
+        </ScrollReveal>
       )}
-    </motion.div>
+    </div>
   );
 }

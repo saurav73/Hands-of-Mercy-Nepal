@@ -1,122 +1,134 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
+import { HandGeometry, HeartShape } from './geometries';
 
-function createHeartShape(): THREE.Shape {
-  const shape = new THREE.Shape();
-  const x = 0, y = 0;
-  shape.moveTo(x, y + 0.5);
-  shape.bezierCurveTo(x, y + 0.5, x - 0.5, y + 1.3, x - 1, y + 1.3);
-  shape.bezierCurveTo(x - 1.7, y + 1.3, x - 1.7, y + 0.5, x - 1.7, y + 0.5);
-  shape.bezierCurveTo(x - 1.7, y, x - 1, y - 0.5, x, y - 1);
-  shape.bezierCurveTo(x + 1, y - 0.5, x + 1.7, y, x + 1.7, y + 0.5);
-  shape.bezierCurveTo(x + 1.7, y + 0.5, x + 1.7, y + 1.3, x + 1, y + 1.3);
-  shape.bezierCurveTo(x + 0.5, y + 1.3, x, y + 0.5, x, y + 0.5);
-  return shape;
-}
-
-function Heart({ scale = 1 }: { scale?: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  const heartGeometry = useMemo(() => {
-    const shape = createHeartShape();
-    const extrudeSettings = { depth: 0.4, bevelEnabled: true, bevelSegments: 8, steps: 2, bevelSize: 0.1, bevelThickness: 0.1 };
-    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
-  }, []);
-
+function PulsingHeart() {
+  const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
     if (ref.current) {
-      const pulse = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.08;
-      ref.current.scale.set(scale * pulse, scale * pulse, scale * pulse);
+      const t = state.clock.elapsedTime;
+      const beat = 1 + Math.sin(t * 3) * 0.06 + Math.sin(t * 6) * 0.03;
+      ref.current.scale.setScalar(beat);
+      ref.current.rotation.y = t * 0.15;
     }
   });
-
   return (
-    <mesh ref={ref} geometry={heartGeometry} rotation={[Math.PI, 0, 0]} position={[0, -0.3, 0]}>
-      <meshStandardMaterial color="#ef4444" roughness={0.2} metalness={0.3} emissive="#dc2626" emissiveIntensity={0.3} />
-    </mesh>
+    <Float speed={1} rotationIntensity={0.15} floatIntensity={0.3}>
+      <group ref={ref} position={[0, 0.2, 0]}>
+        <HeartShape scale={0.35} color="#ef4444" />
+      </group>
+    </Float>
   );
 }
 
-function OrbitingHand({ index }: { index: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  const angleOffset = (index * Math.PI * 2) / 2;
-
+function OrbitingSpheres() {
+  const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
-    if (ref.current) {
-      const t = state.clock.elapsedTime * 0.5 + angleOffset;
-      ref.current.position.x = Math.cos(t) * 2;
-      ref.current.position.z = Math.sin(t) * 1.2;
-      ref.current.position.y = Math.sin(t * 0.7) * 0.5;
-      ref.current.rotation.y = -t + Math.PI / 2;
-    }
+    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.3;
   });
-
   return (
-    <mesh ref={ref}>
-      <sphereGeometry args={[0.25, 16, 8]} />
-      <meshStandardMaterial color="#fcd34d" roughness={0.4} metalness={0.2} transparent opacity={0.85} />
-    </mesh>
+    <group ref={ref}>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const angle = (i / 5) * Math.PI * 2;
+        const r = 1.2;
+        const colors = ['#f59e0b', '#3b82f6', '#10b981', '#8b5cf6', '#ec4899'];
+        return (
+          <Float key={i} speed={2 + i * 0.5} floatIntensity={0.2}>
+            <mesh position={[Math.cos(angle) * r, Math.sin(angle * 0.5) * 0.3, Math.sin(angle) * r]}>
+              <sphereGeometry args={[0.08, 12, 12]} />
+              <meshStandardMaterial
+                color={colors[i]}
+                emissive={colors[i]}
+                emissiveIntensity={0.5}
+                roughness={0.2}
+                metalness={0.4}
+              />
+            </mesh>
+          </Float>
+        );
+      })}
+    </group>
   );
 }
 
-function GlowParticles({ count = 20 }: { count?: number }) {
-  const ref = useRef<THREE.Points>(null);
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 5;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 5;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 4;
-    }
-    return arr;
-  }, [count]);
-
+function OpenHands() {
+  const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
-    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.03;
+    if (ref.current) {
+      ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.15;
+    }
   });
-
   return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial size={0.06} color="#fca5a5" transparent opacity={0.5} sizeAttenuation />
-    </points>
+    <group ref={ref} position={[0, -0.5, 0.3]}>
+      {/* Left hand */}
+      <HandGeometry position={[-0.35, 0, 0]} rotation={[0, 0, 0.2]} color="#fcd34d" />
+      {/* Right hand */}
+      <HandGeometry position={[0.35, 0, 0]} rotation={[0, 0, -0.2]} color="#fcd34d" />
+    </group>
+  );
+}
+
+function Particle({ position, color }: { position: [number, number, number]; color: string }) {
+  const ref = useRef<THREE.Mesh>(null);
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.2 + position[0] * 5) * 0.15;
+      ref.current.position.x = position[0] + Math.cos(state.clock.elapsedTime * 0.8 + position[2] * 3) * 0.05;
+      const s = 0.5 + Math.sin(state.clock.elapsedTime * 2 + position[1]) * 0.5;
+      ref.current.scale.setScalar(s);
+    }
+  });
+  return (
+    <mesh ref={ref} position={position}>
+      <sphereGeometry args={[0.025, 8, 8]} />
+      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.2} roughness={0.3} />
+    </mesh>
   );
 }
 
 function Scene() {
+  const particles = useMemo(() =>
+    Array.from({ length: 40 }, () => ({
+      pos: [
+        (Math.random() - 0.5) * 5,
+        (Math.random() - 0.5) * 3,
+        (Math.random() - 0.5) * 4,
+      ] as [number, number, number],
+      color: ['#ef4444', '#ec4899', '#f59e0b', '#fbbf24'][Math.floor(Math.random() * 4)],
+    })), []);
+
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.7} color="#fef3c7" />
-      <pointLight position={[-3, 2, 3]} intensity={0.5} color="#f87171" />
-      <pointLight position={[3, -1, 2]} intensity={0.3} color="#60a5fa" />
-      <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.4}>
-        <Heart scale={0.8} />
-      </Float>
-      <OrbitingHand index={0} />
-      <OrbitingHand index={1} />
-      <GlowParticles />
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow shadow-mapSize={1024} />
+      <pointLight position={[-3, 2, -2]} color="#ef4444" intensity={0.8} />
+      <pointLight position={[3, -1, 2]} color="#ec4899" intensity={0.4} />
+      <fog attach="fog" args={['#fafafa', 5, 12]} />
+      <Environment preset="city" />
+
+      <PulsingHeart />
+      <OrbitingSpheres />
+      <OpenHands />
+
+      {particles.map((p, i) => (
+        <Particle key={i} position={p.pos} color={p.color} />
+      ))}
+
+      <ContactShadows position={[0, -1.2, 0]} opacity={0.25} scale={8} blur={2} />
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.6} luminanceSmoothing={0.9} intensity={0.8} />
+      </EffectComposer>
     </>
   );
 }
 
-interface MercyHeart3DProps {
-  className?: string;
-}
-
-export function MercyHeart3D({ className }: MercyHeart3DProps) {
+export function MercyHeart3D() {
   return (
-    <div className={`three-container ${className ?? ''}`} style={{ width: '100%', height: '100%' }}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
-        style={{ overflow: 'visible' }}
-        gl={{ alpha: true, antialias: true }}
-      >
-        <Scene />
-      </Canvas>
-    </div>
+    <Canvas camera={{ position: [0, 0.5, 4], fov: 45 }} shadows style={{ background: 'transparent' }}>
+      <Scene />
+    </Canvas>
   );
 }

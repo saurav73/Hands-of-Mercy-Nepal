@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { useLang } from '@/contexts/LanguageContext';
 import { ORG_INFO } from '@/data/organizationData';
+import { Contact3D } from '@/components/three/Contact3D';
 
 const INFO = [
   { icon: Mail, label: 'Email', value: ORG_INFO.contact.email, href: `mailto:${ORG_INFO.contact.email}` },
@@ -40,12 +41,17 @@ export function ContactPage() {
       {/* Hero */}
       <section className="pt-28 pb-16 md:pt-40 md:pb-24">
         <Container>
-          <div className="max-w-3xl">
-            <p className="text-xs tracking-widest uppercase text-faint mb-6">{t.contactEyebrow}</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
-              {t.contactTitle}
-            </h1>
-            <p className="mt-7 text-lg text-muted leading-relaxed max-w-2xl">{t.contactLead}</p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-xs tracking-widest uppercase text-faint mb-6">{t.contactEyebrow}</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
+                {t.contactTitle}
+              </h1>
+              <p className="mt-7 text-lg text-muted leading-relaxed max-w-2xl">{t.contactLead}</p>
+            </div>
+            <div className="h-[300px] md:h-[400px]">
+              <Contact3D />
+            </div>
           </div>
         </Container>
       </section>
@@ -128,7 +134,7 @@ export function ContactPage() {
                           placeholder="How can we help?" />
                         {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
                       </div>
-                      <button type="submit" className="w-full rounded-2xl py-3.5 bg-ink text-white text-sm font-medium hover:bg-ink/90 transition-all inline-flex items-center justify-center gap-2" disabled={sending}>
+                      <button type="submit" className="w-full rounded-full py-3.5 bg-ink text-white text-sm font-medium hover:bg-ink/90 transition-all inline-flex items-center justify-center gap-2" disabled={sending}>
                         {sending ? 'Sending...' : t.contactSend} <ArrowRight className="h-4 w-4" />
                       </button>
                     </form>

@@ -1,120 +1,143 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Environment, ContactShadows, Line } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
+import { GlobeGeometry, StarShape, HeartShape } from './geometries';
 
-function Globe() {
+function RotatingGlobe() {
   const ref = useRef<THREE.Group>(null);
   useFrame((state) => {
-    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.15;
+    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.08;
   });
   return (
     <group ref={ref}>
-      <mesh>
-        <sphereGeometry args={[1.5, 48, 48]} />
-        <meshStandardMaterial color="#1e3a5f" roughness={0.4} metalness={0.3} transparent opacity={0.85} />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[1.52, 32, 32]} />
-        <meshStandardMaterial color="#60a5fa" wireframe transparent opacity={0.25} />
-      </mesh>
-      {/* Latitude lines */}
-      {[-0.5, 0, 0.5].map((y, i) => (
-        <mesh key={`lat-${i}`} position={[0, y, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[Math.sqrt(1.5 * 1.5 - y * y), 0.008, 8, 64]} />
-          <meshStandardMaterial color="#93c5fd" transparent opacity={0.3} />
-        </mesh>
-      ))}
-      {/* Longitude lines */}
-      {[0, 1, 2, 3].map((i) => (
-        <mesh key={`lng-${i}`} rotation={[0, (i * Math.PI) / 4, 0]}>
-          <torusGeometry args={[1.5, 0.008, 8, 64]} />
-          <meshStandardMaterial color="#93c5fd" transparent opacity={0.2} />
-        </mesh>
-      ))}
+      <GlobeGeometry scale={0.8} />
     </group>
   );
 }
 
-function Marker({ position, color }: { position: [number, number, number]; color: string }) {
+function MapMarker({ position, color }: { position: [number, number, number]; color: string }) {
+  const ref = useRef<THREE.Group>(null);
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 2 + position[0]) * 0.05;
+    }
+  });
+  return (
+    <group ref={ref} position={position}>
+      {/* Pin body */}
+      <mesh castShadow>
+        <coneGeometry args={[0.05, 0.12, 8]} />
+        <meshStandardMaterial color={color} roughness={0.3} metalness={0.4} emissive={color} emissiveIntensity={0.3} />
+      </mesh>
+      {/* Pin head */}
+      <mesh position={[0, 0.08, 0]}>
+        <sphereGeometry args={[0.04, 12, 12]} />
+        <meshStandardMaterial color={color} roughness={0.2} metalness={0.5} emissive={color} emissiveIntensity={0.4} />
+      </mesh>
+    </group>
+  );
+}
+
+function ConnectionLine({ start, end }: { start: [number, number, number]; end: [number, number, number] }) {
+  const points = useMemo(() => {
+    const curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(...start),
+      new THREE.Vector3((start[0] + end[0]) / 2, Math.max(start[1], end[1]) + 0.5, (start[2] + end[2]) / 2),
+      new THREE.Vector3(...end)
+    );
+    return curve.getPoints(32).map(p => [p.x, p.y, p.z] as [number, number, number]);
+  }, [start, end]);
+
+  return (
+    <Line points={points} color="#60a5fa" lineWidth={1} transparent opacity={0.4} />
+  );
+}
+
+function OrbitRing({ radius, color }: { radius: number; color: string }) {
+  return (
+    <mesh rotation={[Math.PI / 2, 0, 0]}>
+      <torusGeometry args={[radius, 0.005, 8, 64]} />
+      <meshStandardMaterial color={color} transparent opacity={0.2} />
+    </mesh>
+  );
+}
+
+function Particle({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null);
   useFrame((state) => {
     if (ref.current) {
-      const s = 1 + Math.sin(state.clock.elapsedTime * 3) * 0.3;
-      ref.current.scale.set(s, s, s);
+      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0] * 3) * 0.1;
+      const s = 0.4 + Math.sin(state.clock.elapsedTime * 2 + position[2]) * 0.6;
+      ref.current.scale.setScalar(s);
     }
   });
   return (
     <mesh ref={ref} position={position}>
-      <sphereGeometry args={[0.06, 16, 16]} />
-      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.8} />
+      <sphereGeometry args={[0.015, 6, 6]} />
+      <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={1.5} />
     </mesh>
-  );
-}
-
-function Ring({ radius, y }: { radius: number; y: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  useFrame((state) => {
-    if (ref.current) ref.current.rotation.x = Math.PI / 2 + Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
-  });
-  return (
-    <mesh ref={ref} position={[0, y, 0]} rotation={[Math.PI / 2, 0, 0]}>
-      <torusGeometry args={[radius, 0.01, 8, 64]} />
-      <meshStandardMaterial color="#3b82f6" transparent opacity={0.4} />
-    </mesh>
-  );
-}
-
-function FloatingParticles({ count = 60 }: { count?: number }) {
-  const ref = useRef<THREE.Points>(null);
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 8;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 6;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 6;
-    }
-    return arr;
-  }, [count]);
-  useFrame((state) => {
-    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.01;
-  });
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-      </bufferGeometry>
-      <pointsMaterial size={0.025} color="#93c5fd" transparent opacity={0.5} sizeAttenuation />
-    </points>
   );
 }
 
 function Scene() {
+  const markers = useMemo(() => [
+    { pos: [0.5, 0.8, 0.5] as [number, number, number], color: '#ef4444' },
+    { pos: [-0.3, 0.85, 0.6] as [number, number, number], color: '#f59e0b' },
+    { pos: [0.2, 0.7, -0.6] as [number, number, number], color: '#3b82f6' },
+    { pos: [-0.6, 0.6, -0.4] as [number, number, number], color: '#10b981' },
+    { pos: [0.7, 0.4, -0.3] as [number, number, number], color: '#8b5cf6' },
+  ], []);
+
+  const particles = useMemo(() =>
+    Array.from({ length: 25 }, () => [
+      (Math.random() - 0.5) * 6,
+      (Math.random() - 0.5) * 3,
+      (Math.random() - 0.5) * 5,
+    ] as [number, number, number]), []);
+
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.8} color="#bfdbfe" />
-      <pointLight position={[-4, 3, 4]} intensity={0.6} color="#818cf8" />
-      <pointLight position={[3, -2, 3]} intensity={0.3} color="#60a5fa" />
-      <Float speed={1} rotationIntensity={0.1} floatIntensity={0.3}>
-        <Globe />
-        <Marker position={[1.4, 0.8, 0.8]} color="#ef4444" />
-        <Marker position={[-1.2, 0.5, 1.0]} color="#22c55e" />
-        <Marker position={[0.3, -1.0, 1.2]} color="#f59e0b" />
-        <Ring radius={1.8} y={0} />
-        <Ring radius={2.0} y={0.3} />
-      </Float>
-      <FloatingParticles />
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow shadow-mapSize={1024} />
+      <pointLight position={[-4, 3, -3]} color="#3b82f6" intensity={0.5} />
+      <fog attach="fog" args={['#fafafa', 6, 14]} />
+      <Environment preset="city" />
+
+      <RotatingGlobe />
+
+      {markers.map((m, i) => (
+        <MapMarker key={i} position={m.pos} color={m.color} />
+      ))}
+
+      <ConnectionLine start={[0.5, 0.8, 0.5]} end={[-0.3, 0.85, 0.6]} />
+      <ConnectionLine start={[0.5, 0.8, 0.5]} end={[0.2, 0.7, -0.6]} />
+      <ConnectionLine start={[-0.6, 0.6, -0.4]} end={[0.7, 0.4, -0.3]} />
+
+      <OrbitRing radius={1.2} color="#3b82f6" />
+      <OrbitRing radius={1.5} color="#60a5fa" />
+
+      <StarShape position={[2, 1, -1]} scale={0.4} color="#f59e0b" />
+      <StarShape position={[-2, 0.5, -1.5]} scale={0.3} color="#fbbf24" />
+      <HeartShape position={[1.5, -0.5, -1]} scale={0.1} color="#ef4444" />
+
+      {particles.map((pos, i) => (
+        <Particle key={i} position={pos} />
+      ))}
+
+      <ContactShadows position={[0, -1.5, 0]} opacity={0.2} scale={10} blur={2} />
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.7} luminanceSmoothing={0.9} intensity={0.5} />
+      </EffectComposer>
     </>
   );
 }
 
-export function Globe3D({ className }: { className?: string }) {
+export function Globe3D() {
   return (
-    <div className={`three-container ${className ?? ''}`} style={{ width: '100%', height: '100%' }}>
-      <Canvas camera={{ position: [0, 1, 5], fov: 45 }} gl={{ alpha: true, antialias: true }}>
-        <Scene />
-      </Canvas>
-    </div>
+    <Canvas camera={{ position: [0, 1, 4], fov: 42 }} shadows style={{ background: 'transparent' }}>
+      <Scene />
+    </Canvas>
   );
 }
