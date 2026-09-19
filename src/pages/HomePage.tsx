@@ -12,7 +12,7 @@ import { FloatingBooks3D } from '@/components/three/FloatingBooks3D';
 function Counter({ end, suffix, label }: { end: number; suffix: string; label: string }) {
   const { count, ref } = useCountUp({ end, duration: 2000 });
   return (
-    <div ref={ref} className="text-center">
+    <div ref={ref} className="text-center p-6 rounded-3xl bg-white border border-line">
       <div className="text-4xl md:text-5xl font-semibold tracking-tight">
         {count}<span className="text-faint">{suffix}</span>
       </div>
@@ -33,41 +33,22 @@ export function HomePage() {
         <Container className="pt-24 pb-16 md:pt-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                 <p className="text-xs tracking-widest uppercase text-faint mb-6">{t.heroBadge}</p>
               </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08]"
-              >
+              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08]">
                 {t.heroTitle1}{' '}
                 <span className="text-faint">{t.heroTitle2}</span>
                 <br />
                 {t.heroTitle3}
               </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mt-6 text-muted text-lg leading-relaxed max-w-lg"
-              >
+              <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
+                className="mt-6 text-muted text-lg leading-relaxed max-w-lg">
                 {t.heroDesc}
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mt-10 flex flex-wrap gap-4"
-              >
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
+                className="mt-10 flex flex-wrap gap-4">
                 <Link to="/get-involved">
                   <button className="group inline-flex items-center gap-2 px-7 py-3.5 bg-ink text-white text-sm font-medium rounded-full hover:bg-ink/90 transition-all">
                     {t.heroCta1} <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
@@ -80,13 +61,8 @@ export function HomePage() {
                 </Link>
               </motion.div>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="h-[350px] md:h-[450px] lg:h-[500px]"
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.3 }}
+              className="h-[350px] md:h-[450px] lg:h-[500px]">
               <HeroScene3D />
             </motion.div>
           </div>
@@ -96,7 +72,7 @@ export function HomePage() {
       {/* STATS */}
       <section className="py-20 border-t border-line">
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Counter end={65} suffix="+" label="Children" />
             <Counter end={100} suffix="%" label="Free" />
             <Counter end={10} suffix="+" label="Tutors" />
@@ -109,9 +85,7 @@ export function HomePage() {
       <section className="py-32 md:py-44">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <ScrollReveal>
-              <p className="text-xs tracking-widest uppercase text-faint mb-6">Our Mission</p>
-            </ScrollReveal>
+            <ScrollReveal><p className="text-xs tracking-widest uppercase text-faint mb-6">Our Mission</p></ScrollReveal>
             <ScrollReveal delay={0.1}>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1]">
                 Every child deserves the tools to learn
@@ -119,8 +93,7 @@ export function HomePage() {
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <p className="mt-8 text-muted text-lg leading-relaxed max-w-xl mx-auto">
-                Hands of Mercy Nepal provides free tuition, mentorship, and educational supplies to children
-                in Bungamati — because no child should be left behind.
+                Hands of Mercy Nepal provides free tuition, mentorship, and educational supplies to children in Bungamati — because no child should be left behind.
               </p>
             </ScrollReveal>
           </div>
@@ -128,18 +101,15 @@ export function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 bg-bg">
+      <section className="py-24 bg-bg rounded-4xl mx-4 my-8">
         <Container>
           <div className="text-center mb-16">
             <ScrollReveal>
               <p className="text-xs tracking-widest uppercase text-faint mb-4">Process</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-                From enrollment to impact
-              </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">From enrollment to impact</h2>
             </ScrollReveal>
           </div>
-
-          <div className="grid md:grid-cols-4 gap-px bg-line">
+          <div className="grid md:grid-cols-4 gap-4">
             {[
               { step: '01', icon: Users, title: 'Enroll', desc: 'Community referrals welcome all children.' },
               { step: '02', icon: BookOpen, title: 'Teach', desc: 'Daily tuition from volunteer tutors.' },
@@ -147,10 +117,10 @@ export function HomePage() {
               { step: '04', icon: GraduationCap, title: 'Grow', desc: 'Students become community contributors.' },
             ].map((item, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="bg-white p-8 h-full">
+                <div className="bg-white rounded-3xl border border-line p-7 h-full">
                   <span className="text-xs font-medium text-faint">{item.step}</span>
-                  <div className="w-10 h-10 rounded-full bg-bg flex items-center justify-center mt-4 mb-5">
-                    <item.icon className="h-4 w-4 text-ink" />
+                  <div className="w-11 h-11 rounded-2xl bg-bg flex items-center justify-center mt-4 mb-5">
+                    <item.icon className="h-5 w-5 text-ink" />
                   </div>
                   <h3 className="font-medium text-ink mb-2">{item.title}</h3>
                   <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
@@ -161,7 +131,7 @@ export function HomePage() {
         </Container>
       </section>
 
-      {/* 3D SHOWCASE — BOOKS */}
+      {/* 3D BOOKS */}
       <section className="py-32 md:py-44">
         <Container>
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -172,12 +142,9 @@ export function HomePage() {
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
               <p className="text-xs tracking-widest uppercase text-faint mb-4">Education</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
-                Learning without limits
-              </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">Learning without limits</h2>
               <p className="mt-6 text-muted text-lg leading-relaxed">
-                Our volunteer tutors provide personalized attention in Math, Science, English, and Nepali — 
-                helping each child reach their potential.
+                Our volunteer tutors provide personalized attention in Math, Science, English, and Nepali — helping each child reach their potential.
               </p>
               <Link to="/education" className="inline-flex items-center gap-2 mt-8 text-sm font-medium text-ink hover:gap-3 transition-all">
                 Explore programs <ArrowRight className="h-4 w-4" />
@@ -188,7 +155,7 @@ export function HomePage() {
       </section>
 
       {/* QUOTE */}
-      <section className="py-32 md:py-44 bg-ink text-white">
+      <section className="py-32 md:py-44 bg-ink text-white rounded-4xl mx-4 my-8">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             <ScrollReveal>
@@ -201,18 +168,15 @@ export function HomePage() {
         </Container>
       </section>
 
-      {/* 3D SHOWCASE — HEART */}
+      {/* 3D HEART */}
       <section className="py-32 md:py-44">
         <Container>
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal>
               <p className="text-xs tracking-widest uppercase text-faint mb-4">Community</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
-                Built on fellowship
-              </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">Built on fellowship</h2>
               <p className="mt-6 text-muted text-lg leading-relaxed">
-                Our tutors come from Jyoti Great Commission Fellowship — building a community 
-                that wraps around every child with care.
+                Our tutors come from Jyoti Great Commission Fellowship — building a community that wraps around every child with care.
               </p>
               <div className="mt-8 flex gap-4">
                 <Link to="/about">
@@ -237,18 +201,15 @@ export function HomePage() {
       </section>
 
       {/* PROGRAMS */}
-      <section className="py-24 bg-bg">
+      <section className="py-24 bg-bg rounded-4xl mx-4 my-8">
         <Container>
           <div className="text-center mb-16">
             <ScrollReveal>
               <p className="text-xs tracking-widest uppercase text-faint mb-4">Programs</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-                What we offer
-              </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">What we offer</h2>
             </ScrollReveal>
           </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { icon: BookOpen, title: 'Tutoring', desc: 'Math, Science, English, Nepali — personalized.' },
               { icon: GraduationCap, title: 'SEE Prep', desc: 'Exam coaching for secondary students.' },
@@ -256,9 +217,9 @@ export function HomePage() {
               { icon: Users, title: 'Outreach', desc: 'Engaging families in the journey.' },
             ].map((item, i) => (
               <ScrollReveal key={i} delay={i * 0.08}>
-                <div className="bg-white p-7 rounded-2xl border border-line hover:shadow-card transition-all duration-300 group">
-                  <div className="w-10 h-10 rounded-full bg-bg flex items-center justify-center mb-4 group-hover:bg-ink group-hover:text-white transition-all">
-                    <item.icon className="h-4 w-4 text-ink group-hover:text-white transition-all" />
+                <div className="bg-white rounded-3xl border border-line p-7 hover:shadow-card transition-all duration-300 group">
+                  <div className="w-11 h-11 rounded-2xl bg-bg flex items-center justify-center mb-4 group-hover:bg-ink group-hover:text-white transition-all">
+                    <item.icon className="h-5 w-5 text-ink group-hover:text-white transition-all" />
                   </div>
                   <h3 className="font-medium text-ink mb-2">{item.title}</h3>
                   <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
@@ -274,14 +235,10 @@ export function HomePage() {
         <Container>
           <div className="max-w-2xl mx-auto text-center">
             <ScrollReveal>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">
-                Ready to make a difference?
-              </h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1]">Ready to make a difference?</h2>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
-              <p className="mt-6 text-muted text-lg leading-relaxed">
-                Every donation, every hour of volunteering, every shared story helps a child learn and grow.
-              </p>
+              <p className="mt-6 text-muted text-lg leading-relaxed">Every donation, every hour of volunteering, every shared story helps a child learn and grow.</p>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -291,9 +248,7 @@ export function HomePage() {
                   </button>
                 </Link>
                 <Link to="/contact">
-                  <button className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium rounded-full border border-line hover:bg-bg transition-all">
-                    Contact us
-                  </button>
+                  <button className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium rounded-full border border-line hover:bg-bg transition-all">Contact us</button>
                 </Link>
               </div>
             </ScrollReveal>

@@ -18,6 +18,10 @@ export default {
         line: '#E5E5E5',
         bg: '#FAFAFA',
       },
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.5rem',
+      },
       boxShadow: {
         'minimal': '0 1px 2px rgba(0,0,0,0.04)',
         'card': '0 2px 8px rgba(0,0,0,0.04)',

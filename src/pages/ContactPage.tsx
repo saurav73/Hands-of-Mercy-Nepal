@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { useLang } from '@/contexts/LanguageContext';
 import { ORG_INFO } from '@/data/organizationData';
@@ -38,41 +36,39 @@ export function ContactPage() {
   };
 
   return (
-    <div>
+    <div className="bg-white">
       {/* Hero */}
-      <section className="pt-28 pb-20 md:pt-40 md:pb-28 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] md:w-[600px] h-[300px] sm:h-[400px] md:h-[600px] rounded-full bg-blue-50/50 blur-[60px] md:blur-[80px] -translate-y-1/3 translate-x-1/4" />
-        <div className="absolute inset-0 dot-pattern opacity-30" />
-        <Container className="relative z-10">
+      <section className="pt-28 pb-16 md:pt-40 md:pb-24">
+        <Container>
           <div className="max-w-3xl">
-            <Badge variant="indigo" className="mb-4">{t.contactEyebrow}</Badge>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-[1.05] tracking-[-0.03em] mt-3">
+            <p className="text-xs tracking-widest uppercase text-faint mb-6">{t.contactEyebrow}</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05]">
               {t.contactTitle}
             </h1>
-            <p className="mt-7 text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl">{t.contactLead}</p>
+            <p className="mt-7 text-lg text-muted leading-relaxed max-w-2xl">{t.contactLead}</p>
           </div>
         </Container>
       </section>
 
       {/* Content */}
-      <section className="py-32 bg-slate-50">
+      <section className="py-24 bg-bg rounded-4xl mx-4 my-8">
         <Container>
-          <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
             {/* Sidebar */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-3">
               {INFO.map((item, i) => (
                 <ScrollReveal key={item.label} delay={i * 0.08}>
-                  <div className="rounded-2xl bg-white border border-slate-100 p-5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-500">
+                  <div className="rounded-3xl bg-white border border-line p-5 hover:shadow-card transition-all duration-300">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-                        <item.icon className="h-5 w-5 text-blue-600" />
+                      <div className="w-10 h-10 rounded-2xl bg-bg flex items-center justify-center shrink-0">
+                        <item.icon className="h-5 w-5 text-ink" />
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-0.5">{item.label}</p>
+                        <p className="text-xs font-semibold text-faint uppercase tracking-wider mb-0.5">{item.label}</p>
                         {item.href ? (
-                          <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-slate-900 hover:text-blue-600 transition-colors">{item.value}</a>
+                          <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-ink hover:text-muted transition-colors">{item.value}</a>
                         ) : (
-                          <p className="text-sm font-medium text-slate-900">{item.value}</p>
+                          <p className="text-sm font-medium text-ink">{item.value}</p>
                         )}
                       </div>
                     </div>
@@ -84,40 +80,40 @@ export function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-3">
               <ScrollReveal>
-                <div className="rounded-2xl bg-white border border-slate-100 p-8">
-                  <h2 className="font-serif text-2xl font-bold text-slate-900 mb-1">Send Us a Message</h2>
-                  <p className="text-sm text-slate-400 mb-6">We'll respond within 24 hours.</p>
+                <div className="rounded-3xl bg-white border border-line p-8">
+                  <h2 className="text-2xl font-semibold text-ink mb-1">Send Us a Message</h2>
+                  <p className="text-sm text-muted mb-6">We'll respond within 24 hours.</p>
                   {sent ? (
                     <div className="py-16 text-center">
-                      <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-4">
-                        <CheckCircle className="h-7 w-7 text-blue-600" />
+                      <div className="w-14 h-14 rounded-full bg-bg flex items-center justify-center mx-auto mb-4">
+                        <CheckCircle className="h-7 w-7 text-ink" />
                       </div>
-                      <h3 className="font-serif text-xl font-bold text-slate-900 mb-2">Message Sent</h3>
-                      <p className="text-sm text-slate-400">Thank you for reaching out. We'll be in touch soon.</p>
-                      <button onClick={() => setSent(false)} className="mt-5 text-sm font-medium text-blue-600 hover:underline">Send another message</button>
+                      <h3 className="text-xl font-semibold text-ink mb-2">Message Sent</h3>
+                      <p className="text-sm text-muted">Thank you for reaching out. We'll be in touch soon.</p>
+                      <button onClick={() => setSent(false)} className="mt-5 text-sm font-medium text-ink hover:underline">Send another message</button>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                      <div className="grid sm:grid-cols-2 gap-5">
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1.5">{t.contactName}</label>
+                          <label className="block text-xs font-semibold text-faint mb-1.5">{t.contactName}</label>
                           <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                            className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${errors.name ? 'border-red-300 bg-red-50/50' : 'border-slate-200 bg-slate-50 focus:border-blue-500 focus:bg-white'}`}
+                            className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none transition-colors ${errors.name ? 'border-red-300 bg-red-50/50' : 'border-line bg-bg focus:border-ink focus:bg-white'}`}
                             placeholder="Your name" />
                           {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1.5">{t.contactEmail}</label>
+                          <label className="block text-xs font-semibold text-faint mb-1.5">{t.contactEmail}</label>
                           <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
-                            className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${errors.email ? 'border-red-300 bg-red-50/50' : 'border-slate-200 bg-slate-50 focus:border-blue-500 focus:bg-white'}`}
+                            className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none transition-colors ${errors.email ? 'border-red-300 bg-red-50/50' : 'border-line bg-bg focus:border-ink focus:bg-white'}`}
                             placeholder="you@example.com" />
                           {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-slate-500 mb-1.5">Subject</label>
+                        <label className="block text-xs font-semibold text-faint mb-1.5">Subject</label>
                         <select value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm outline-none focus:border-blue-500 focus:bg-white transition-colors">
+                          className="w-full px-4 py-3 rounded-2xl border border-line bg-bg text-sm outline-none focus:border-ink focus:bg-white transition-colors">
                           <option value="general">General Inquiry</option>
                           <option value="donate">Donation</option>
                           <option value="volunteer">Volunteering</option>
@@ -126,15 +122,15 @@ export function ContactPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-slate-500 mb-1.5">{t.contactMessage}</label>
+                        <label className="block text-xs font-semibold text-faint mb-1.5">{t.contactMessage}</label>
                         <textarea rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
-                          className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors resize-none ${errors.message ? 'border-red-300 bg-red-50/50' : 'border-slate-200 bg-slate-50 focus:border-blue-500 focus:bg-white'}`}
+                          className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none transition-colors resize-none ${errors.message ? 'border-red-300 bg-red-50/50' : 'border-line bg-bg focus:border-ink focus:bg-white'}`}
                           placeholder="How can we help?" />
                         {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
                       </div>
-                      <Button type="submit" className="w-full rounded-xl py-3.5" disabled={sending}>
+                      <button type="submit" className="w-full rounded-2xl py-3.5 bg-ink text-white text-sm font-medium hover:bg-ink/90 transition-all inline-flex items-center justify-center gap-2" disabled={sending}>
                         {sending ? 'Sending...' : t.contactSend} <ArrowRight className="h-4 w-4" />
-                      </Button>
+                      </button>
                     </form>
                   )}
                 </div>
