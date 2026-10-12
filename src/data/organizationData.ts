@@ -10,16 +10,11 @@ export const ORG_INFO = {
     district: "Lalitpur",
     country: "Nepal",
     fullAddress: "Bungamati, Lalitpur, Bagmati Province, Nepal",
-    addressPlaceholder: "[Official Physical Office / Classroom Address in Bungamati]",
   },
   contact: {
     email: "info@handsofmercynepal.org.np",
-    emailPlaceholder: "[Official Email: info@handsofmercynepal.org.np]",
     phone: "+977 (Official Contact Number to be announced)",
-    phonePlaceholder: "[Official Phone: +977-XX-XXXXXXX]",
-    fellowshipLeader: "[Fellowship Coordinator / Pastor]",
   },
-  established: "[Community Initiative]",
   missionStatement: "To provide free, high-quality tuition and holistic educational encouragement to children in Nepal who lack access to adequate learning assistance, fostering confidence, character, and lifelong hope.",
   visionStatement: "A community where every child, regardless of economic background, has the guidance, books, and loving mentorship needed to learn and thrive.",
   coreValues: [
