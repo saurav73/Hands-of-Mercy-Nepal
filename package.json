@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@heyputer/puter.js": "^2.6.3",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.17.14",
     "@react-three/postprocessing": "^2.19.1",
