@@ -60,6 +60,7 @@ src/
   data/         # organization data + EN/NE translations
   contexts/     # LanguageContext
   hooks/        # useCountUp (animated stat counters)
+  utils/        # cn() class-name helper
   types/        # shared TypeScript types
 ```
 
