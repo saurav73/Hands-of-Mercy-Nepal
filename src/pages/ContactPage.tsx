@@ -5,6 +5,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { useLang } from '@/contexts/LanguageContext';
 import { ORG_INFO } from '@/data/organizationData';
 import { Contact3D } from '@/components/three/Contact3D';
+import { PlaceholderNotice } from '@/components/ui/PlaceholderNotice';
 
 const INFO = [
   { icon: Mail, label: 'Email', value: ORG_INFO.contact.email, href: `mailto:${ORG_INFO.contact.email}` },
@@ -76,6 +77,7 @@ export function ContactPage() {
                         ) : (
                           <p className="text-sm font-medium text-ink">{item.value}</p>
                         )}
+                        {item.label === 'Phone' && <PlaceholderNotice className="mt-1.5" />}
                       </div>
                     </div>
                   </div>
