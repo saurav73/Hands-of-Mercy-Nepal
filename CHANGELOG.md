@@ -2,8 +2,13 @@
 
 ## Unreleased
 
-- Wrote the full README (project overview, pages, tech stack, setup,
-  deployment, project structure). The old README was a one-line title.
+## 2026-10-12
+
+- Cleanup: removed dead placeholder fields from organization data and dropped
+  the orphaned `@heyputer/kv.js` lock entry plus the unused
+  `@heyputer/puter.js` dependency.
+- Contact page: show a placeholder badge on the phone card.
+- README: added `src/utils` to the project structure section.
 
 ## 2026-09-19
 
