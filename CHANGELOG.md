@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 2026-10-16
+
+- Docs: added JSDoc to the `cn()` class-name helper and to the `useCountUp`
+  hook's options interface and function.
+- README: documented the `@/` import alias (maps to `src/` via tsconfig paths
+  and the Vite `resolve.alias`).
+
 ## 2026-10-12
 
 - Cleanup: removed dead placeholder fields from organization data and dropped
