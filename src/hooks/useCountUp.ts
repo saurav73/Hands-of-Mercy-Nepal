@@ -1,11 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface UseCountUpOptions {
+  /** The final value the counter settles on. */
   end: number;
+  /** Animation length in milliseconds. Defaults to 2000. */
   duration?: number;
+  /**
+   * When true, the counter waits until the attached element is at least 30%
+   * visible in the viewport before animating. Set to false to start
+   * immediately on mount.
+   */
   startOnView?: boolean;
 }
 
+/**
+ * Animates a number from 0 to `end` with an ease-out curve.
+ *
+ * Returns the current `count` to render and a `ref` to attach to the element
+ * that should trigger the animation when scrolled into view. The animation
+ * runs once per mount and cleans up its IntersectionObserver on unmount.
+ */
 export function useCountUp({ end, duration = 2000, startOnView = true }: UseCountUpOptions) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
