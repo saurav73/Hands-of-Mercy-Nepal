@@ -64,6 +64,11 @@ src/
   types/        # shared TypeScript types
 ```
 
+The `@/` prefix maps to `src/` (configured in both `tsconfig.json` paths and
+the Vite `resolve.alias` in `vite.config.ts`), so imports like
+`@/components/ui/Button` resolve to `src/components/ui/Button`. Use the alias
+in new files instead of relative `../../` paths.
+
 ## Maintainers
 
 Built and maintained by Saurav (saurav73).
