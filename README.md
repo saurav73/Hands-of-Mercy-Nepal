@@ -24,6 +24,7 @@ sign-ups, and contact information.
 | `/gallery`       | Gallery      |
 | `/get-involved`  | Get Involved |
 | `/contact`       | Contact      |
+| `*`              | 404 Not Found (English / Nepali) |
 
 ## Tech stack
 
