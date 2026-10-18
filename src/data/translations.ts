@@ -198,6 +198,11 @@ export const translations = {
     footerCopyright: 'All rights reserved. Built with love for the children of Bungamati.',
     footerNoFees: 'No fees collected through this website. All support is coordinated directly.',
 
+    // Not found
+    notFoundTitle: 'Page not found',
+    notFoundDesc: 'The page you are looking for does not exist or has been moved.',
+    notFoundCta: 'Back to Home',
+
     // Placeholders
     placeholder: 'Verified Organization Placeholder',
     placeholderAccuracy: 'Our Commitment to Accuracy:',
@@ -398,6 +403,11 @@ export const translations = {
     footerProg4: 'परिवार सहकार्य',
     footerCopyright: 'सबै अधिकार सुरक्षित। बुङ्गामतीका बालबालिकाहरूको लागि मायाले निर्माण गरिएको।',
     footerNoFees: 'यो वेबसाइटमार्फत कुनै शुल्क लिइँदैन। सबै सहयोग सिधै समन्वय गरिन्छ।',
+
+    // Not found
+    notFoundTitle: 'पृष्ठ फेला परेन',
+    notFoundDesc: 'तपाईंले खोज्नुभएको पृष्ठ अवस्थित छैन वा सारिएको छ।',
+    notFoundCta: 'गृहपृष्ठमा फर्कनुहोस्',
 
     // Placeholders
     placeholder: 'प्रमाणित संस्था प्लेसहोल्डर',

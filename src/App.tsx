@@ -9,6 +9,7 @@ import { StoriesPage } from './pages/StoriesPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { GetInvolvedPage } from './pages/GetInvolvedPage';
 import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import './index.css';
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/get-involved" element={<GetInvolvedPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </LanguageProvider>
