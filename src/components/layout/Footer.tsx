@@ -21,7 +21,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line">
       <Container>
-        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-1">
             <Logo size="sm" />
             <p className="mt-4 text-sm text-muted leading-relaxed max-w-xs">{t.footerMission}</p>
@@ -46,14 +46,6 @@ export function Footer() {
                   <Link to={link.to} className="text-sm text-muted hover:text-ink transition-colors">{link.label}</Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xs tracking-widest uppercase text-faint mb-4">Legal</h4>
-            <ul className="space-y-2.5">
-              <li><Link to="/privacy" className="text-sm text-muted hover:text-ink transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-sm text-muted hover:text-ink transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
 
