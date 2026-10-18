@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 2026-10-18
+
+- Footer: removed the dead Privacy Policy / Terms of Service links — no such
+  routes exist, and they rendered a blank content area.
+- Routing: added a catch-all 404 page (`NotFoundPage`) with English/Nepali
+  copy, so unknown deep links show a proper page instead of blank content.
+
 ## 2026-10-16
 
 - Docs: added JSDoc to the `cn()` class-name helper and to the `useCountUp`
