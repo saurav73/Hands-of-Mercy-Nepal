@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 2026-10-19
+
+- Docs: file-header JSDoc on the app root (`App.tsx`), the layout shell
+  (`PageLayout`, `Navbar`, `Footer`), and the `Logo` branding component.
+
 ## 2026-10-18
 
 - Footer: removed the dead Privacy Policy / Terms of Service links — no such
