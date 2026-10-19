@@ -1,3 +1,7 @@
+/**
+ * Site header: sticky animated navbar with route links, the EN/NE language
+ * toggle, active-route highlighting, and an animated mobile menu.
+ */
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe, ArrowRight } from 'lucide-react';

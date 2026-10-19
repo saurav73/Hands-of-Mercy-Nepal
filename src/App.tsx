@@ -1,3 +1,8 @@
+/**
+ * Application root: BrowserRouter wrapped in the LanguageProvider, with
+ * PageLayout (navbar + footer chrome) around every route and a catch-all
+ * NotFoundPage for unknown URLs.
+ */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { PageLayout } from './components/layout/PageLayout';

@@ -1,3 +1,7 @@
+/**
+ * Organization logo: gradient heart icon with the "Hands of Mercy / Nepal"
+ * wordmark in three sizes (sm, md, lg).
+ */
 import { Heart } from 'lucide-react';
 import { cn } from '@/utils/cn';
 

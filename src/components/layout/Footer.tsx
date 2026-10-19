@@ -1,3 +1,7 @@
+/**
+ * Site footer: contact details pulled from ORG_INFO, quick-link columns,
+ * and the heart branding.
+ */
 import { Link } from 'react-router-dom';
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 import { Logo } from '@/components/branding/Logo';

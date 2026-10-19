@@ -1,3 +1,7 @@
+/**
+ * Shared page shell: Navbar, a skip-to-content link, the routed page via
+ * Outlet, then the Footer. Used by every route in App.tsx.
+ */
 import { Outlet } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
