@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 2026-10-20
+
+- Docs: file-header JSDoc on all 9 UI components, the `LanguageContext` i18n
+  provider, the `useCountUp` hook, and the `organizationData`/`translations`
+  data modules — continues the 2026-10-19 doc pass.
+- Verified the README route table against `App.tsx`: all 8 routes + the
+  catch-all 404 match exactly.
+
 ## 2026-10-19
 
 - Docs: file-header JSDoc on the app root (`App.tsx`), the layout shell
