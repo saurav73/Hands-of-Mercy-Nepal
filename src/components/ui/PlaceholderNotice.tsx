@@ -1,3 +1,7 @@
+/**
+ * Temporary notice rendered where real content (e.g. gallery photos) is
+ * still pending.
+ */
 import { Info } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 import { cn } from '@/utils/cn';

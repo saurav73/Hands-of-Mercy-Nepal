@@ -1,3 +1,7 @@
+/**
+ * Banner hero for inner pages: eyebrow, title, optional description and
+ * children.
+ */
 import { motion } from 'framer-motion';
 import { Container } from './Container';
 

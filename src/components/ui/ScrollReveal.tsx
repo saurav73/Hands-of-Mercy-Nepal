@@ -1,3 +1,7 @@
+/**
+ * Scroll-triggered reveal wrapper (framer-motion): fades/slides children in
+ * once when they first enter the viewport.
+ */
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 

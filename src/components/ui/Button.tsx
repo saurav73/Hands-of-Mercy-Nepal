@@ -1,3 +1,7 @@
+/**
+ * Shared button in `primary` / `secondary` / `ghost` / `link` variants and
+ * `sm` / `md` / `lg` sizes.
+ */
 import { forwardRef } from 'react';
 import { cn } from '@/utils/cn';
 

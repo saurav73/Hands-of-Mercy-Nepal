@@ -1,3 +1,7 @@
+/**
+ * End-of-page call-to-action band: title, description, a primary link and an
+ * optional secondary link.
+ */
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Container } from './Container';

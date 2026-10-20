@@ -1,3 +1,7 @@
+/**
+ * Accessible modal dialog: closes on Escape and backdrop click, restores
+ * focus to the opener on close.
+ */
 import { useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';

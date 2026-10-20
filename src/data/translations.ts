@@ -1,3 +1,6 @@
+/**
+ * English/Nepali UI string dictionary consumed by LanguageContext.
+ */
 export type Lang = 'en' | 'ne';
 
 export const translations = {

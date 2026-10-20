@@ -1,3 +1,6 @@
+/**
+ * Centered max-width page container used by every content section.
+ */
 import { cn } from '@/utils/cn';
 
 interface ContainerProps {

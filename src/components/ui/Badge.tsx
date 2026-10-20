@@ -1,3 +1,6 @@
+/**
+ * Small status/label pill: `primary`, `secondary`, or `muted` variant.
+ */
 import { cn } from '@/utils/cn';
 
 interface BadgeProps {

@@ -1,3 +1,7 @@
+/**
+ * Bilingual i18n state for the whole app: current language, the translation
+ * dictionary, and a language toggle.
+ */
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import { translations, type Lang } from '@/data/translations';
 

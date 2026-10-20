@@ -1,3 +1,7 @@
+/**
+ * Animated number counter: counts up to `end` over `duration` ms, optionally
+ * waiting until the element is 30% visible in the viewport.
+ */
 import { useEffect, useRef, useState } from 'react';
 
 interface UseCountUpOptions {

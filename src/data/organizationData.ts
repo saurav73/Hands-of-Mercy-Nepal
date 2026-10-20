@@ -1,3 +1,7 @@
+/**
+ * Static organization facts consumed across the site: name, tagline,
+ * location, contact details, programs, and impact stats.
+ */
 import { ProgramItem, ImpactStat, StoryItem, GalleryItem, FAQItem } from '../types';
 
 export const ORG_INFO = {

@@ -1,3 +1,6 @@
+/**
+ * Section heading block: eyebrow, title, and optional description.
+ */
 import { ScrollReveal } from './ScrollReveal';
 
 interface SectionHeaderProps {
