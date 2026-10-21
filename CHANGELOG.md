@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 2026-10-21
+
+- Docs: file-header JSDoc on the remaining 26 src files — all 12 3D scenes,
+  the shared geometries module, the SVG illustration set, all 9 pages,
+  `main.tsx`, `types/index.ts`, and `utils/cn.ts` (every src file now has a
+  file header).
+- Hygiene note: `components/three/ImpactGlobe3D.tsx` and
+  `components/three/FloatingParticles.tsx` are currently not imported by any
+  page (each scene is wired to its own page); flagged for the next cleanup
+  pass, not deleted today.
+
 ## 2026-10-20
 
 - Docs: file-header JSDoc on all 9 UI components, the `LanguageContext` i18n
