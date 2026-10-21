@@ -1,3 +1,6 @@
+/**
+ * 404 catch-all page: friendly not-found message with a link back home.
+ */
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Container } from '@/components/ui/Container';

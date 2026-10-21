@@ -1,3 +1,7 @@
+/**
+ * Education page: program listings with detail modals and the Classroom3D
+ * hero scene.
+ */
 import { useState } from 'react';
 import { BookOpen, PenTool, HeartHandshake, Users, ArrowRight, CheckCircle, Clock, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';

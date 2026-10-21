@@ -1,3 +1,7 @@
+/**
+ * 3D donation box scene with falling coins used as the Get Involved page
+ * hero.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

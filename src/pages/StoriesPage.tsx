@@ -1,3 +1,7 @@
+/**
+ * Stories page: beneficiary story cards with full-story modals and the
+ * Stories3D hero scene.
+ */
 import { useState } from 'react';
 import { ArrowRight, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';

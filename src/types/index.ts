@@ -1,3 +1,7 @@
+/**
+ * Shared TypeScript domain types: programs, impact stats, stories, gallery
+ * items, and other shapes used across pages and data modules.
+ */
 export interface ProgramItem {
   id: string;
   title: string;

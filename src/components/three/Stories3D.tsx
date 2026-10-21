@@ -1,3 +1,7 @@
+/**
+ * Animated 3D scene with floating typing dots used as the Stories page
+ * hero.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

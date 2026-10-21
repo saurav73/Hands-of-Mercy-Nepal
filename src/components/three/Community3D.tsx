@@ -1,3 +1,7 @@
+/**
+ * Animated 3D community scene: a gathering of people used as the About
+ * page hero.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

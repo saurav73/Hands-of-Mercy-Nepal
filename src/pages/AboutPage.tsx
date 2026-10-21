@@ -1,3 +1,7 @@
+/**
+ * About page: mission story, values, timeline, and the Community3D hero
+ * scene.
+ */
 import { Heart, BookOpen, Users, Sparkles, ArrowRight, Quote, Calendar, MapPin, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container } from '@/components/ui/Container';

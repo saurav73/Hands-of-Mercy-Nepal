@@ -1,3 +1,6 @@
+/**
+ * Pulsing 3D heart scene used as a brand motif on the home page.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

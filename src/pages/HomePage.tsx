@@ -1,3 +1,7 @@
+/**
+ * Home page: 3D hero scenes, program highlights, impact stats, and calls
+ * to action.
+ */
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Heart, BookOpen, Users, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';

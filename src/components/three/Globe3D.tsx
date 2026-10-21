@@ -1,3 +1,7 @@
+/**
+ * Rotating 3D globe with orbiting hearts and stars used as the Impact
+ * page hero.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, ContactShadows, Line } from '@react-three/drei';

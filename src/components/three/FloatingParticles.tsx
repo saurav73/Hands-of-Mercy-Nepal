@@ -1,3 +1,7 @@
+/**
+ * Ambient floating particle field rendered in a Canvas; standalone
+ * decorative background layer for hero sections.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, ContactShadows } from '@react-three/drei';

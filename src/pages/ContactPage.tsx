@@ -1,3 +1,7 @@
+/**
+ * Contact page: contact details, form, and the Contact3D envelope hero
+ * scene.
+ */
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Container } from '@/components/ui/Container';

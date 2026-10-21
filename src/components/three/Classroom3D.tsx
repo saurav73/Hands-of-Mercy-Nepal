@@ -1,3 +1,7 @@
+/**
+ * Animated 3D classroom scene (desks, chairs, chalkboard, globe, floating
+ * particles) used as the Education page hero.
+ */
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, ContactShadows } from '@react-three/drei';

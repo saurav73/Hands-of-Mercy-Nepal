@@ -1,3 +1,7 @@
+/**
+ * 3D globe plotting impact locations from lat/lng data — a geographic
+ * visualization of the organization's reach.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';

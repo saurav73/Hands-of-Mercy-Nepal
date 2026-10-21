@@ -1,3 +1,7 @@
+/**
+ * Gallery page: photo grid with lightbox viewer and the Gallery3D hero
+ * scene.
+ */
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';

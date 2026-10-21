@@ -1,3 +1,8 @@
+/**
+ * Reusable react-three-fiber geometry components shared by the 3D scenes:
+ * book, pencil, desk, chair, person, chalkboard, donation box, hand, coin,
+ * globe, star, heart, and ground plane primitives.
+ */
 import { useMemo } from 'react';
 import * as THREE from 'three';
 

@@ -1,3 +1,6 @@
+/**
+ * 3D photo-frame scene used as the Gallery page hero.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

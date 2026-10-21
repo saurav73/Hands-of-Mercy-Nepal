@@ -1,3 +1,8 @@
+/**
+ * Class-name helper module: conditional class composition (clsx) with
+ * conflicting Tailwind classes merged (tailwind-merge), so later classes
+ * win. Used by nearly every component.
+ */
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

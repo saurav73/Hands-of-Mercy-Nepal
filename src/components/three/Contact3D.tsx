@@ -1,3 +1,6 @@
+/**
+ * Animated 3D envelope scene used as the Contact page hero.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

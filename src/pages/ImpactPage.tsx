@@ -1,3 +1,7 @@
+/**
+ * Impact page: animated impact statistics with the rotating Globe3D hero
+ * scene.
+ */
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { TrendingUp, BookOpen, Users, GraduationCap, Heart, ArrowRight, CheckCircle, Target } from 'lucide-react';

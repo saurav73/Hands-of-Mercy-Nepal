@@ -1,3 +1,7 @@
+/**
+ * Get Involved page: volunteer and donate calls to action with an FAQ
+ * accordion and the Volunteer3D donation-box hero scene.
+ */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Heart, BookOpen, Users, Megaphone, ChevronDown } from 'lucide-react';

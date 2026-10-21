@@ -1,3 +1,7 @@
+/**
+ * App entry point: mounts the root component inside StrictMode on #root,
+ * wrapped in the language provider for site-wide EN/NE translations.
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

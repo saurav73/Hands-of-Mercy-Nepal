@@ -1,3 +1,7 @@
+/**
+ * Animated 3D home hero: rotating graduation cap with floating books,
+ * pencils, bloom post-processing, and contact shadows.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

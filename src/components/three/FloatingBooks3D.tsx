@@ -1,3 +1,7 @@
+/**
+ * Gently bobbing 3D books and study props used as a decorative section
+ * on the home page.
+ */
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, ContactShadows } from '@react-three/drei';

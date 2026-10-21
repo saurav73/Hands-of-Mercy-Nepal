@@ -1,3 +1,7 @@
+/**
+ * Brand SVG illustration set: mercy hand, book, children, community,
+ * heart-in-hand, and graduation motifs used as decorative section art.
+ */
 export function MercyHandSvg({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
