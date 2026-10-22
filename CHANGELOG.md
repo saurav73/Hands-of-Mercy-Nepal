@@ -1,6 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
 ## Unreleased
+- Dead-code finding (pending Saurav's go-ahead to delete): `ImpactGlobe3D.tsx` and `FloatingParticles.tsx` in `src/components/three/` are exported but imported by nothing; flag for removal rather than silently deleting
+
+## 2026-10-22
+- Verified all src files carry file-header JSDoc (none missing), README route table (8 pages) and `@/` alias claim match `tsconfig.json`/`vite.config.ts`, and index.html title (55 chars) meets the SEO title rule — no changes needed beyond today's Unreleased note
 
 ## 2026-10-21
 
