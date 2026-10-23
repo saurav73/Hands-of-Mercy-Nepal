@@ -1,5 +1,9 @@
 # Changelog — Hand of Mercy Nepal
 
+## 2026-10-23
+- Re-verified the README: route table (8 pages + 404) matches `src/pages/`, React Router 7 claim matches `package.json`, `@/` alias claim still matches the Vite/TS config; the 2026-10-22 dead-code flag (`ImpactGlobe3D.tsx`, `FloatingParticles.tsx` still imported by nothing) remains pending Saurav's go-ahead to delete — no changes made
+
+
 ## Unreleased
 - Dead-code finding (pending Saurav's go-ahead to delete): `ImpactGlobe3D.tsx` and `FloatingParticles.tsx` in `src/components/three/` are exported but imported by nothing; flag for removal rather than silently deleting
 
