@@ -1,10 +1,21 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
+# NOTE (2026-10-24): the deploy-preview and deploy-production jobs were removed.
+# They were left over from the repo's initial commit and could never succeed:
+# no VERCEL_TOKEN secret is configured and no Vercel project is linked to this
+# repo, so every push to main ended in a failed "Deploy Production" run and a
+# failure email. The live site (handofmercy.vercel.app) is deployed separately
+# from the local source in ~/workspace/projects/hands-of-mercy-src via the
+# Vercel CLI, and it is NOT touched by this workflow. If the repo is ever
+# synced to the live site's code and wired to a Vercel project, the deploy
+# jobs can be restored from git history (see commit "Remove broken deploy
+# jobs from CI").
 
 jobs:
   build:
@@ -28,71 +39,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-  deploy-preview:
-    name: Deploy Preview
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install Vercel CLI
-        run: npm install --global vercel
-
-      - name: Pull Vercel Environment
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Build
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy Preview
-        id: deploy-preview
-        run: |
-          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
-          echo "url=$url" >> $GITHUB_OUTPUT
-
-      - name: Comment PR with preview URL
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Preview deployed: ${{ steps.deploy-preview.outputs.url }}`
-            })
-
-  deploy-production:
-    name: Deploy Production
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install Vercel CLI
-        run: npm install --global vercel
-
-      - name: Pull Vercel Environment
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Build
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy Production
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
