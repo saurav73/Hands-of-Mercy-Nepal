@@ -1,5 +1,9 @@
 # Changelog — Hand of Mercy Nepal
 
+## 2026-10-24
+- Re-audited the dead-code flag with finer precision: `ImpactGlobe3D.tsx` and `FloatingParticles.tsx` are genuinely unimported; `Classroom3D.tsx` (which defines its own local `FloatingParticles` helper) is live via `EducationPage.tsx` — so only the two standalone files remain flagged for Saurav's go-ahead to delete; no files touched
+- Re-verified the README route table (8 pages + 404) against `src/App.tsx` — all match; no doc changes needed
+
 ## 2026-10-23
 - Re-verified the README: route table (8 pages + 404) matches `src/pages/`, React Router 7 claim matches `package.json`, `@/` alias claim still matches the Vite/TS config; the 2026-10-22 dead-code flag (`ImpactGlobe3D.tsx`, `FloatingParticles.tsx` still imported by nothing) remains pending Saurav's go-ahead to delete — no changes made
 
