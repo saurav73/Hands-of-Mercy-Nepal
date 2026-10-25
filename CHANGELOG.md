@@ -1,5 +1,9 @@
 # Changelog — Hand of Mercy Nepal
 
+## 2026-10-25
+- Pushed the 2026-10-24 CI fix (2ab1cde) that had never reached origin: the deploy-preview and deploy-production jobs are gone, CI now runs build + typecheck only, so pushes stop failing on the missing Vercel secret
+- Re-verified the README route table (8 pages + 404) against `src/App.tsx` and the React Router 7 claim against `package.json` — still accurate; the dead-code flag (`ImpactGlobe3D.tsx`, `FloatingParticles.tsx` unimported) remains pending Saurav's go-ahead
+
 ## 2026-10-24
 - Re-audited the dead-code flag with finer precision: `ImpactGlobe3D.tsx` and `FloatingParticles.tsx` are genuinely unimported; `Classroom3D.tsx` (which defines its own local `FloatingParticles` helper) is live via `EducationPage.tsx` — so only the two standalone files remain flagged for Saurav's go-ahead to delete; no files touched
 - Re-verified the README route table (8 pages + 404) against `src/App.tsx` — all match; no doc changes needed
