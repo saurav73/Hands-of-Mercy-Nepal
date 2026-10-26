@@ -1,5 +1,9 @@
 # Changelog — Hand of Mercy Nepal
 
+## 2026-10-26
+- README: added a deployment warning — this repo holds the previous 3D build, while the live site serves a simplified rewrite deployed separately via the Vercel CLI, so deploying this repo to production would replace the live site; mirrors the existing CI workflow note
+- Re-verified the README route table (8 pages + 404) against `src/App.tsx` — still accurate
+
 ## 2026-10-25
 - Pushed the 2026-10-24 CI fix (2ab1cde) that had never reached origin: the deploy-preview and deploy-production jobs are gone, CI now runs build + typecheck only, so pushes stop failing on the missing Vercel secret
 - Re-verified the README route table (8 pages + 404) against `src/App.tsx` and the React Router 7 claim against `package.json` — still accurate; the dead-code flag (`ImpactGlobe3D.tsx`, `FloatingParticles.tsx` unimported) remains pending Saurav's go-ahead
