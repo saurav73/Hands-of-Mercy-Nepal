@@ -52,6 +52,14 @@ Requires Node.js 18+.
 Hosted on Vercel. `vercel.json` rewrites all routes to `index.html` so
 client-side routing works on deep links.
 
+> **Note on the live site:** this repo holds the previous build (Vite + React
+> with 3D scenes). The live site at handofmercy.vercel.app currently serves a
+> simplified rewrite that is deployed separately from another source via the
+> Vercel CLI — it is NOT deployed from this repo. Do not deploy this repo to
+> production expecting to update the live site; doing so would replace the
+> simplified live site with this older build. See the note in
+> `.github/workflows/deploy.yml` for the same warning on the CI side.
+
 ## Project structure
 
 ```
