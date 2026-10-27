@@ -1,5 +1,8 @@
 # Changelog — Hand of Mercy Nepal
 
+## 2026-10-27
+- README: corrected the structure note - src/pages/ holds 9 page components (8 routes + the 404 page), not 8
+
 ## 2026-10-26
 - README: added a deployment warning — this repo holds the previous 3D build, while the live site serves a simplified rewrite deployed separately via the Vercel CLI, so deploying this repo to production would replace the live site; mirrors the existing CI workflow note
 - Re-verified the README route table (8 pages + 404) against `src/App.tsx` — still accurate
