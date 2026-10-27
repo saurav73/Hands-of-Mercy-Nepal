@@ -64,7 +64,7 @@ client-side routing works on deep links.
 
 ```
 src/
-  pages/        # the 8 route pages
+  pages/        # the 9 page components (8 routes + the 404 page)
   components/   # layout, branding, ui primitives, three/ 3D scenes, svg
   data/         # organization data + EN/NE translations
   contexts/     # LanguageContext
