@@ -1,5 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
+
+## 2026-10-28
+- README: pinned the stack in Tech to Vite 6, TypeScript 5.7 and React Router 7.18, matching package.json
+- Re-verified the route table and structure note: 9 page components, 8 routes + 404, all listed component folders present
+
 ## 2026-10-27
 - README: corrected the structure note - src/pages/ holds 9 page components (8 routes + the 404 page), not 8
 
