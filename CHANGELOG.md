@@ -1,6 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
 
+## 2026-10-29
+- README: pinned Tailwind CSS 3.4 and Framer Motion 12 in Tech stack, matching package.json
+- Re-verified the structure note: components/ folders (branding, layout, svg, three, ui) and data/ files (organizationData, translations) all present
+
 ## 2026-10-28
 - README: pinned the stack in Tech to Vite 6, TypeScript 5.7 and React Router 7.18, matching package.json
 - Re-verified the route table and structure note: 9 page components, 8 routes + 404, all listed component folders present
