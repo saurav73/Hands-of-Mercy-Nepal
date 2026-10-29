@@ -29,11 +29,11 @@ sign-ups, and contact information.
 ## Tech stack
 
 - Vite 6 + React 18 + TypeScript 5.7
-- Tailwind CSS + custom UI components
+- Tailwind CSS 3.4 + custom UI components
 - React Router 7.18 (client-side routing)
 - `@react-three/fiber` / `@react-three/drei` / `@react-three/postprocessing`
   for the 3D hero and section scenes
-- Framer Motion animations, Lucide icons
+- Framer Motion 12 animations, Lucide icons
 - i18n via a built-in `LanguageContext` (English / Nepali)
 
 ## Getting started
