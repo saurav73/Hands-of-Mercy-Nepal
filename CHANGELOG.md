@@ -1,6 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
 
+## 2026-10-30
+- README: Getting started now states the dev-server port (http://localhost:3000, from vite.config.ts server.port)
+- Re-verified: src/pages/ still holds the 9 page components the README describes (8 routes + 404); React Router 7.18 and TypeScript 5.7 match package.json
+
 ## 2026-10-29
 - README: pinned Tailwind CSS 3.4 and Framer Motion 12 in Tech stack, matching package.json
 - Re-verified the structure note: components/ folders (branding, layout, svg, three, ui) and data/ files (organizationData, translations) all present
