@@ -40,7 +40,7 @@ sign-ups, and contact information.
 
 ```bash
 npm install
-npm run dev      # start the dev server
+npm run dev      # start the dev server on http://localhost:3000 (vite.config.ts server.port)
 npm run build    # type-check + production build (outputs to dist/)
 npm run preview  # preview the production build
 ```
