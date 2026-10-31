@@ -73,6 +73,8 @@ src/
   types/        # shared TypeScript types
 ```
 
+In total, `src/` holds 39 `.tsx` files (pages + components) and 5 `.ts` modules, counted from the tree.
+
 The `@/` prefix maps to `src/` (configured in both `tsconfig.json` paths and
 the Vite `resolve.alias` in `vite.config.ts`), so imports like
 `@/components/ui/Button` resolve to `src/components/ui/Button`. Use the alias
