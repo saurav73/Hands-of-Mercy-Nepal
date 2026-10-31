@@ -1,6 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
 
+## 2026-10-31
+- README: structure section now states the src/ totals (39 .tsx files, 5 .ts modules), counted from the tree
+- Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-10-30
 - README: Getting started now states the dev-server port (http://localhost:3000, from vite.config.ts server.port)
 - Re-verified: src/pages/ still holds the 9 page components the README describes (8 routes + 404); React Router 7.18 and TypeScript 5.7 match package.json
