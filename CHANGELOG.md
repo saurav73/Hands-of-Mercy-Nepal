@@ -1,6 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
 
+## 2026-11-01
+- README: structure section now names the 5 .ts modules and the 5 component groups, counted from src/
+- Re-verified: package.json versions still match the README tech stack (Vite 6, React 18, TypeScript 5.7, Tailwind 3.4, Router 7.18, Framer Motion 12)
+
 ## 2026-10-31
 - README: structure section now states the src/ totals (39 .tsx files, 5 .ts modules), counted from the tree
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
