@@ -75,6 +75,8 @@ src/
 
 In total, `src/` holds 39 `.tsx` files (pages + components) and 5 `.ts` modules, counted from the tree.
 
+The 5 `.ts` modules are `data/organizationData.ts`, `data/translations.ts`, `hooks/useCountUp.ts`, `types/index.ts`, and `utils/cn.ts`; `components/` holds 5 groups: `branding`, `layout`, `svg`, `three`, and `ui`.
+
 The `@/` prefix maps to `src/` (configured in both `tsconfig.json` paths and
 the Vite `resolve.alias` in `vite.config.ts`), so imports like
 `@/components/ui/Button` resolve to `src/components/ui/Button`. Use the alias
