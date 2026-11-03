@@ -74,6 +74,7 @@ src/
 ```
 
 In total, `src/` holds 39 `.tsx` files (pages + components) and 5 `.ts` modules, counted from the tree.
+`vite.config.ts` maps the `@` import alias to `./src` (used by 62 imports across `src/`, counted from the tree), and pins the dev server to port 3000.
 
 The 5 `.ts` modules are `data/organizationData.ts`, `data/translations.ts`, `hooks/useCountUp.ts`, `types/index.ts`, and `utils/cn.ts`; `components/` holds 5 groups: `branding`, `layout`, `svg`, `three`, and `ui`.
 
