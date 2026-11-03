@@ -1,6 +1,10 @@
 # Changelog — Hand of Mercy Nepal
 
 
+## 2026-11-03
+- README: structure section now documents the vite.config.ts `@` alias to ./src (62 imports) and the dev-server port 3000, counted from the tree
+- Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-02
 - README: structure section now names the three/ (13 files) and ui/ (9 primitives) counts, counted from src/components/
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
