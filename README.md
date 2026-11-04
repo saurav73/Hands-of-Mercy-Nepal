@@ -78,7 +78,7 @@ In total, `src/` holds 39 `.tsx` files (pages + components) and 5 `.ts` modules,
 
 The 5 `.ts` modules are `data/organizationData.ts`, `data/translations.ts`, `hooks/useCountUp.ts`, `types/index.ts`, and `utils/cn.ts`; `components/` holds 5 groups: `branding`, `layout`, `svg`, `three`, and `ui`.
 
-Within `components/`, `three/` holds 13 files (12 3D scenes plus `geometries.tsx`) and `ui/` holds 9 primitives (`Badge`, `Button`, `Container`, `CtaSection`, `Modal`, `PageHero`, `PlaceholderNotice`, `ScrollReveal`, `SectionHeader`), counted from `src/components/`.
+Within `components/`, `three/` holds 13 files (12 3D scenes plus `geometries.tsx`) and `ui/` holds 9 primitives (`Badge`, `Button`, `Container`, `CtaSection`, `Modal`, `PageHero`, `PlaceholderNotice`, `ScrollReveal`, `SectionHeader`), counted from `src/components/`. The full group breakdown is 27 files: `branding` 1, `layout` 3, `svg` 1, `three` 13, `ui` 9.
 
 The `@/` prefix maps to `src/` (configured in both `tsconfig.json` paths and
 the Vite `resolve.alias` in `vite.config.ts`), so imports like
