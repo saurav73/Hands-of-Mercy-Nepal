@@ -1,6 +1,11 @@
 # Changelog — Hand of Mercy Nepal
 
 
+
+## 2026-11-04
+- README: structure section now states the full `components/` group breakdown (27 files: branding 1, layout 3, svg 1, three 13, ui 9), counted from `src/components/`
+- Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-03
 - README: structure section now documents the vite.config.ts `@` alias to ./src (62 imports) and the dev-server port 3000, counted from the tree
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
