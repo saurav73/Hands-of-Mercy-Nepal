@@ -2,6 +2,10 @@
 
 
 
+## 2026-11-05
+- README: structure section now names the 9 page components (About, Contact, Education, Gallery, GetInvolved, Home, Impact, Stories + NotFound), counted from `src/pages/`
+- Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-04
 - README: structure section now states the full `components/` group breakdown (27 files: branding 1, layout 3, svg 1, three 13, ui 9), counted from `src/components/`
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
