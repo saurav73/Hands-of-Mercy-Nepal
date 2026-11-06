@@ -2,6 +2,10 @@
 
 
 
+## 2026-11-06
+- README: structure section now states the 9 routes in App.tsx (8 pages + the `*` catch-all to NotFoundPage, all inside PageLayout), counted from `src/App.tsx`
+- Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-05
 - README: structure section now names the 9 page components (About, Contact, Education, Gallery, GetInvolved, Home, Impact, Stories + NotFound), counted from `src/pages/`
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
