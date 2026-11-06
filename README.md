@@ -76,6 +76,8 @@ src/
 In total, `src/` holds 39 `.tsx` files (pages + components) and 5 `.ts` modules, counted from the tree.
 `vite.config.ts` maps the `@` import alias to `./src` (used by 62 imports across `src/`, counted from the tree), and pins the dev server to port 3000.
 
+`App.tsx` declares 9 routes: the 8 pages plus a `*` catch-all to `NotFoundPage`, all inside the shared `PageLayout`, counted from `src/App.tsx`.
+
 The 5 `.ts` modules are `data/organizationData.ts`, `data/translations.ts`, `hooks/useCountUp.ts`, `types/index.ts`, and `utils/cn.ts`; `components/` holds 5 groups: `branding`, `layout`, `svg`, `three`, and `ui`.
 
 Within `components/`, `three/` holds 13 files (12 3D scenes plus `geometries.tsx`) and `ui/` holds 9 primitives (`Badge`, `Button`, `Container`, `CtaSection`, `Modal`, `PageHero`, `PlaceholderNotice`, `ScrollReveal`, `SectionHeader`), counted from `src/components/`. The full group breakdown is 27 files: `branding` 1, `layout` 3, `svg` 1, `three` 13, `ui` 9.
