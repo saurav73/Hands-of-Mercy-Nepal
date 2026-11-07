@@ -2,6 +2,10 @@
 
 
 
+## 2026-11-07
+- README: Deployment section now documents the CI workflow (`.github/workflows/deploy.yml` builds and type-checks every push to `main` on Node 20; no deploy jobs since 2026-10-24)
+- Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-06
 - README: structure section now states the 9 routes in App.tsx (8 pages + the `*` catch-all to NotFoundPage, all inside PageLayout), counted from `src/App.tsx`
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
