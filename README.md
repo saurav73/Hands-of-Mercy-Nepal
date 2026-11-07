@@ -60,6 +60,11 @@ client-side routing works on deep links.
 > simplified live site with this older build. See the note in
 > `.github/workflows/deploy.yml` for the same warning on the CI side.
 
+CI (`.github/workflows/deploy.yml`) builds and type-checks every push to `main`
+(Node 20, `npm ci`, `tsc --noEmit`, `npm run build`); it has no deploy jobs —
+they were removed 2026-10-24 because no Vercel project is linked to this repo,
+so the workflow never touches the live site.
+
 ## Project structure
 
 ```
