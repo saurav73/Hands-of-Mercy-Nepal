@@ -2,6 +2,10 @@
 
 
 
+## 2026-11-08
+- README: i18n line now records the translation parity check (175 keys in each locale, full EN/NE parity), counted from `src/data/translations.ts`
+- Re-verified: `package.json` versions still match the README (Vite 6, React 18, TypeScript 5.7, Tailwind 3.4, React Router 7.18, Framer Motion 12), the 9 App.tsx routes are unchanged, and the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-07
 - README: Deployment section now documents the CI workflow (`.github/workflows/deploy.yml` builds and type-checks every push to `main` on Node 20; no deploy jobs since 2026-10-24)
 - Re-verified: the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
