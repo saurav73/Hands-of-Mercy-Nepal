@@ -76,6 +76,8 @@ src/
   hooks/        # useCountUp (animated stat counters)
   utils/        # cn() class-name helper
   types/        # shared TypeScript types
+  main.tsx      # app entry point: mounts `App` in StrictMode inside `LanguageProvider`
+  index.css     # Tailwind directives + global styles (Plus Jakarta Sans, smooth scroll)
 ```
 
 In total, `src/` holds 39 `.tsx` files (pages + components) and 5 `.ts` modules, counted from the tree.
