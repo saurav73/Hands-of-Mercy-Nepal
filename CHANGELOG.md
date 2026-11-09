@@ -2,6 +2,10 @@
 
 
 
+## 2026-11-09
+- README: structure section now names the two top-level `src/` files it omitted — `main.tsx` (app entry point, mounts `App` in StrictMode inside `LanguageProvider`) and `index.css` (Tailwind directives + global styles)
+- Re-verified: the EN/NE translation parity still holds (175 keys each), the `src/` totals are unchanged (39 `.tsx` files, 5 `.ts` modules, 62 `@/` imports), and the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-08
 - README: i18n line now records the translation parity check (175 keys in each locale, full EN/NE parity), counted from `src/data/translations.ts`
 - Re-verified: `package.json` versions still match the README (Vite 6, React 18, TypeScript 5.7, Tailwind 3.4, React Router 7.18, Framer Motion 12), the 9 App.tsx routes are unchanged, and the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
