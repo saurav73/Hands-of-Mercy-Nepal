@@ -2,6 +2,10 @@
 
 
 
+## 2026-11-11
+- README: the i18n line now records the translation-parity check as verified 2026-11-11 (re-counted today: still 175 keys in each locale, full EN/NE parity)
+- Re-verified: the `src/` totals are unchanged (39 `.tsx` files, 5 `.ts` modules, 62 `@/` imports), the 9 App.tsx routes are unchanged (8 pages + `*` catch-all inside the shared `PageLayout`), the `components/` breakdown still holds (branding 1, layout 3, svg 1, three 13, ui 9), `package.json` scripts still match the README (`dev` vite, `build` `tsc && vite build`, `preview` vite preview), `vite.config.ts` still pins the dev server to port 3000, `vercel.json` still rewrites all routes to `index.html`, and the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
+
 ## 2026-11-10
 - README: the i18n line now records the translation-parity check as verified 2026-11-10 (re-counted today: still 175 keys in each locale, full EN/NE parity)
 - Re-verified: the `src/` totals are unchanged (39 `.tsx` files, 5 `.ts` modules, 62 `@/` imports), the 9 App.tsx routes are unchanged, `package.json` scripts still match the README (`dev` vite, `build` `tsc && vite build`, `preview` vite preview), `vercel.json` still rewrites all routes to `index.html`, and the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
