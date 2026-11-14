@@ -34,7 +34,7 @@ sign-ups, and contact information.
 - `@react-three/fiber` / `@react-three/drei` / `@react-three/postprocessing`
   for the 3D hero and section scenes
 - Framer Motion 12 animations, Lucide icons
-- i18n via a built-in `LanguageContext` (English / Nepali) — 175 keys in each locale with full EN/NE parity, verified 2026-11-13, counted from `src/data/translations.ts`
+- i18n via a built-in `LanguageContext` (English / Nepali) — 175 keys in each locale with full EN/NE parity, verified 2026-11-14, counted from `src/data/translations.ts`
 
 ## Getting started
 
