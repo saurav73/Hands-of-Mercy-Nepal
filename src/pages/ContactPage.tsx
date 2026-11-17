@@ -11,15 +11,14 @@ import { ORG_INFO } from '@/data/organizationData';
 import { Contact3D } from '@/components/three/Contact3D';
 import { PlaceholderNotice } from '@/components/ui/PlaceholderNotice';
 
-const INFO = [
-  { icon: Mail, label: 'Email', value: ORG_INFO.contact.email, href: `mailto:${ORG_INFO.contact.email}` },
-  { icon: Phone, label: 'Phone', value: ORG_INFO.contact.phone, href: `tel:${ORG_INFO.contact.phone.replace(/\s/g, '')}` },
-  { icon: MapPin, label: 'Location', value: ORG_INFO.location.fullAddress, href: `https://maps.google.com/?q=${encodeURIComponent(ORG_INFO.location.fullAddress)}` },
-  { icon: Clock, label: 'Program Hours', value: 'Sunday - Thursday, 4:00 PM - 6:00 PM', href: null },
-];
-
 export function ContactPage() {
   const { t } = useLang();
+  const INFO = [
+    { icon: Mail, label: t.contactEmailLabel, value: ORG_INFO.contact.email, href: `mailto:${ORG_INFO.contact.email}` },
+    { icon: Phone, label: t.contactPhoneLabel, value: ORG_INFO.contact.phone, href: `tel:${ORG_INFO.contact.phone.replace(/\s/g, '')}` },
+    { icon: MapPin, label: t.contactLocation, value: ORG_INFO.location.fullAddress, href: `https://maps.google.com/?q=${encodeURIComponent(ORG_INFO.location.fullAddress)}` },
+    { icon: Clock, label: 'Program Hours', value: 'Sunday - Thursday, 4:00 PM - 6:00 PM', href: null },
+  ];
   const [form, setForm] = useState({ name: '', email: '', subject: 'general', message: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -101,7 +100,7 @@ export function ContactPage() {
                         <CheckCircle className="h-7 w-7 text-ink" />
                       </div>
                       <h3 className="text-xl font-semibold text-ink mb-2">Message Sent</h3>
-                      <p className="text-sm text-muted">Thank you for reaching out. We'll be in touch soon.</p>
+                      <p className="text-sm text-muted">{t.contactSuccess}</p>
                       <button onClick={() => setSent(false)} className="mt-5 text-sm font-medium text-ink hover:underline">Send another message</button>
                     </div>
                   ) : (
@@ -111,14 +110,14 @@ export function ContactPage() {
                           <label className="block text-xs font-semibold text-faint mb-1.5">{t.contactName}</label>
                           <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
                             className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none transition-colors ${errors.name ? 'border-red-300 bg-red-50/50' : 'border-line bg-bg focus:border-ink focus:bg-white'}`}
-                            placeholder="Your name" />
+                            placeholder={t.contactNamePlaceholder} />
                           {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
                         </div>
                         <div>
                           <label className="block text-xs font-semibold text-faint mb-1.5">{t.contactEmail}</label>
                           <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                             className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none transition-colors ${errors.email ? 'border-red-300 bg-red-50/50' : 'border-line bg-bg focus:border-ink focus:bg-white'}`}
-                            placeholder="you@example.com" />
+                            placeholder={t.contactEmailPlaceholder} />
                           {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                         </div>
                       </div>
@@ -137,11 +136,11 @@ export function ContactPage() {
                         <label className="block text-xs font-semibold text-faint mb-1.5">{t.contactMessage}</label>
                         <textarea rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                           className={`w-full px-4 py-3 rounded-2xl border text-sm outline-none transition-colors resize-none ${errors.message ? 'border-red-300 bg-red-50/50' : 'border-line bg-bg focus:border-ink focus:bg-white'}`}
-                          placeholder="How can we help?" />
+                          placeholder={t.contactMessagePlaceholder} />
                         {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
                       </div>
                       <button type="submit" className="w-full rounded-full py-3.5 bg-ink text-white text-sm font-medium hover:bg-ink/90 transition-all inline-flex items-center justify-center gap-2" disabled={sending}>
-                        {sending ? 'Sending...' : t.contactSend} <ArrowRight className="h-4 w-4" />
+                        {sending ? t.contactSending : t.contactSend} <ArrowRight className="h-4 w-4" />
                       </button>
                     </form>
                   )}
