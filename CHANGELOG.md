@@ -1,5 +1,9 @@
 # Changelog — Hand of Mercy Nepal
 
+## 2026-11-23
+- README: the i18n line now records the translation-parity check as verified 2026-11-23 (re-counted today: still 175 keys in each locale, full EN/NE parity, no duplicates)
+- Re-verified: `tsc --noEmit` clean and a full `vite build` succeeds (built in 21.63s, chunk-size warning only); the `src/` totals are unchanged (39 `.tsx` files, 5 `.ts` modules, 62 `@/` imports); `package.json` versions still match the README (Vite 6, React 18, TypeScript 5.7, Tailwind 3.4, Framer Motion 12); the 46 unused translation keys are unchanged (same set as 2026-11-20), left untouched pending Saurav's call
+
 ## 2026-11-20
 - README: the i18n line now records the translation-parity check as verified 2026-11-20 (re-counted today: still 175 keys in each locale, full EN/NE parity)
 - Re-verified: `tsc --noEmit` clean and a full `vite build` succeeds (built in ~16s, chunk-size warning only); the `src/` totals are unchanged (39 `.tsx` files, 5 `.ts` modules, 62 `@/` imports), the 9 App.tsx routes are unchanged (8 pages + `*` catch-all inside the shared `PageLayout`), `package.json` versions still match the README (Vite 6, React 18, TypeScript 5.7, Tailwind 3.4, React Router 7.18, Framer Motion 12), `vite.config.ts` still pins the dev server to port 3000, `vercel.json` still rewrites all routes to `index.html`, and the live-site divergence note still stands (repo holds the previous 3D build; the simplified site deploys separately)
